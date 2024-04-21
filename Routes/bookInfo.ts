@@ -3,7 +3,7 @@ import { getBookRatingsById, removeRating, setRating } from "../Controllers/book
 
 const router = Router();
 
-router.get('/getratings', getBookRatingsById);
+router.post('/getratings', getBookRatingsById);
 router.post('/setrating', setRating);
 router.delete('/removeRating', removeRating);
 
