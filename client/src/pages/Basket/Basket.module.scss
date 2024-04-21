@@ -1,0 +1,16 @@
+.basket {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-between;
+    gap: 25px;
+    margin-top: 40px;
+
+
+    h2 {
+        grid-column-start: 3 span;
+    }
+
+    &__basketBookList {
+        grid-column-start: 2 span;
+    }
+}

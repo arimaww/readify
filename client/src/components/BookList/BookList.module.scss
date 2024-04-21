@@ -1,0 +1,124 @@
+.books {
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        a {
+            outline: none;
+            border: 0;
+            background-color: #0084FF;
+            color: #fff;
+            padding: 17px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            transition: background-color .2s ease-in-out;
+
+            &:hover {
+                background-color: #0084ffc1;
+            }
+        }
+    }
+
+
+    &__cards {
+        display: grid;
+        grid-template-columns: repeat(3, 20%);
+        justify-content: center;
+        user-select: none;
+        gap: 100px;
+        margin-top: 70px;
+        padding: 0;
+
+        h3,
+        h6,
+        p {
+            text-align: start;
+            margin: 0;
+            padding: 0;
+        }
+
+        
+
+        a {
+            text-decoration: none;
+            color: #000;
+        }
+    }
+
+    &__card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #ffffff;
+        box-shadow: 0 0 20px #0000002b;
+        padding: 20px;
+        gap: 10px;
+        border-radius: 7px;
+
+
+        a {
+            img {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+
+        transition: background-color .2s ease-in-out;
+
+        div {
+            display: flex;
+            gap: 10px;
+            button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 0;
+                color: #fff;
+                border-radius: 7px;
+                height: 30px;
+                width: 90px;
+                font-size: 14px;
+                font-weight: 500;
+                background-color: rgb(202, 11, 11);
+                outline: none;
+                cursor: pointer;
+
+                transition: background-color .2s ease-in-out;
+
+                &:hover {
+                    background-color: rgb(246, 73, 73);
+                }
+            }
+
+            a {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 0;
+                color: #fff;
+                border-radius: 7px;
+                font-size: 14px;
+                font-weight: 500;
+                height: 30px;
+                width: 90px;
+                background-color: rgb(0, 181, 0);
+
+                transition: background-color .2s ease-in-out;
+
+                &:hover {
+                    background-color: rgb(38, 224, 38);
+                }
+            }
+        }
+
+    }
+
+
+}

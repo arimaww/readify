@@ -1,0 +1,170 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model BookType {
+  typeId   Int    @id @unique @default(autoincrement())
+  typeName String
+  book     Book[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Languages {
+  RUSSIAN
+  ENGLISH
+  GERMANY
+  AZERBAIJANIAN
+}
+
+model Book {
+  bookId      Int        @id @unique @default(autoincrement())
+  bookName    String
+  about       String
+  description String
+  type        BookType   @relation(fields: [typeId], references: [typeId])
+  typeId      Int
+  author      Author     @relation(fields: [authorId], references: [authorId])
+  authorId    Int
+  category    Categories @relation(fields: [categoryId], references: [categoryId])
+  categoryId  Int
+  language    Languages  @default(RUSSIAN)
+  cost        Int
+  picture     String?
+  file        String
+
+  basket   Basket[]
+  favorite Favorite[]
+  purchase Purchase[]
+  sale     Sale[]
+  rating   Rating[]
+  comments Comments[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Categories {
+  categoryId   Int    @id @unique @default(autoincrement())
+  categoryName String
+
+  book Book[]
+}
+
+enum Role {
+  ADMIN
+  MODER
+  AUTHOR
+  USER
+}
+
+model User {
+  userId       Int      @id @unique @default(autoincrement())
+  firstName    String
+  surName      String
+  middleName   String
+  email        String   @unique
+  phone        String   @unique
+  password     String
+  profilePhoto String?
+  dateOfBirth  DateTime
+  role         Role     @default(USER)
+
+  basket   Basket[]
+  favorite Favorite[]
+  purchase Purchase[]
+  author   Author?
+  rating   Rating[]
+
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  Comments  Comments[]
+}
+
+model Basket {
+  basketId Int @id @unique @default(autoincrement())
+
+  user   User @relation(fields: [userId], references: [userId])
+  userId Int
+
+  book   Book @relation(fields: [bookId], references: [bookId])
+  bookId Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Favorite {
+  favoriteId Int @id @unique @default(autoincrement())
+
+  user   User @relation(fields: [userId], references: [userId])
+  userId Int
+  book   Book @relation(fields: [bookId], references: [bookId])
+  bookId Int
+}
+
+model Purchase {
+  purchasedId Int @id @unique @default(autoincrement())
+
+  user   User @relation(fields: [userId], references: [userId])
+  userId Int
+  book   Book @relation(fields: [bookId], references: [bookId])
+  bookId Int
+}
+
+model Author {
+  authorId Int  @id @unique @default(autoincrement())
+  user     User @relation(fields: [authorId], references: [userId])
+
+  book Book[]
+  sale Sale[]
+}
+
+model Sale {
+  saleId Int @id @unique @default(autoincrement())
+
+  author   Author @relation(fields: [authorId], references: [authorId])
+  authorId Int
+  book     Book   @relation(fields: [bookId], references: [bookId])
+  bookId   Int
+}
+
+
+model Rating {
+  ratingId Int @id @unique @default(autoincrement())
+
+  value Decimal
+
+  book   Book @relation(fields: [bookId], references: [bookId])
+  bookId Int
+
+  user   User @relation(fields: [userId], references: [userId])
+  userId Int
+}
+
+model Comments {
+  commentId Int    @id @default(autoincrement())
+  text      String
+
+  book   Book @relation(fields: [bookId], references: [bookId])
+  bookId Int
+
+  user   User @relation(fields: [userId], references: [userId])
+  userId Int
+}

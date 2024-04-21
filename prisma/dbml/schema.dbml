@@ -1,0 +1,168 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table BookType {
+  typeId Int [pk, increment]
+  typeName String [not null]
+  book Book [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table Book {
+  bookId Int [pk, increment]
+  bookName String [not null]
+  about String [not null]
+  description String [not null]
+  type BookType [not null]
+  typeId Int [not null]
+  author Author [not null]
+  authorId Int [not null]
+  category Categories [not null]
+  categoryId Int [not null]
+  language Languages [not null, default: 'RUSSIAN']
+  cost Int [not null]
+  picture String
+  file String [not null]
+  basket Basket [not null]
+  favorite Favorite [not null]
+  purchase Purchase [not null]
+  sale Sale [not null]
+  rating Rating [not null]
+  comments Comments [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table Categories {
+  categoryId Int [pk, increment]
+  categoryName String [not null]
+  book Book [not null]
+}
+
+Table User {
+  userId Int [pk, increment]
+  firstName String [not null]
+  surName String [not null]
+  middleName String [not null]
+  email String [unique, not null]
+  phone String [unique, not null]
+  password String [not null]
+  profilePhoto String
+  dateOfBirth DateTime [not null]
+  role Role [not null, default: 'USER']
+  basket Basket [not null]
+  favorite Favorite [not null]
+  purchase Purchase [not null]
+  author Author
+  rating Rating [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  Comments Comments [not null]
+}
+
+Table Basket {
+  basketId Int [pk, increment]
+  user User [not null]
+  userId Int [not null]
+  book Book [not null]
+  bookId Int [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table Favorite {
+  favoriteId Int [pk, increment]
+  user User [not null]
+  userId Int [not null]
+  book Book [not null]
+  bookId Int [not null]
+}
+
+Table Purchase {
+  purchasedId Int [pk, increment]
+  user User [not null]
+  userId Int [not null]
+  book Book [not null]
+  bookId Int [not null]
+}
+
+Table Author {
+  authorId Int [pk, increment]
+  user User [not null]
+  book Book [not null]
+  sale Sale [not null]
+}
+
+Table Sale {
+  saleId Int [pk, increment]
+  author Author [not null]
+  authorId Int [not null]
+  book Book [not null]
+  bookId Int [not null]
+}
+
+Table Rating {
+  ratingId Int [pk, increment]
+  value Decimal [not null]
+  book Book [not null]
+  bookId Int [not null]
+  user User [not null]
+  userId Int [not null]
+}
+
+Table Comments {
+  commentId Int [pk, increment]
+  text String [not null]
+  book Book [not null]
+  bookId Int [not null]
+  user User [not null]
+  userId Int [not null]
+}
+
+Enum Languages {
+  RUSSIAN
+  ENGLISH
+  GERMANY
+  AZERBAIJANIAN
+}
+
+Enum Role {
+  ADMIN
+  MODER
+  AUTHOR
+  USER
+}
+
+Ref: Book.typeId > BookType.typeId
+
+Ref: Book.authorId > Author.authorId
+
+Ref: Book.categoryId > Categories.categoryId
+
+Ref: Basket.userId > User.userId
+
+Ref: Basket.bookId > Book.bookId
+
+Ref: Favorite.userId > User.userId
+
+Ref: Favorite.bookId > Book.bookId
+
+Ref: Purchase.userId > User.userId
+
+Ref: Purchase.bookId > Book.bookId
+
+Ref: Author.authorId - User.userId
+
+Ref: Sale.authorId > Author.authorId
+
+Ref: Sale.bookId > Book.bookId
+
+Ref: Rating.bookId > Book.bookId
+
+Ref: Rating.userId > User.userId
+
+Ref: Comments.bookId > Book.bookId
+
+Ref: Comments.userId > User.userId

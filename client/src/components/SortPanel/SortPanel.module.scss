@@ -1,0 +1,57 @@
+.sortPanel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background-color: rgba(244, 244, 244, 0.655);
+    box-shadow: 0 0 24px #00000028;
+    border-radius: 12px;
+    width: 220px;
+    height: 100%;
+    padding: 24px;
+
+
+    &__inputItem {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+
+        input {
+            margin: 0;
+            padding: 0;
+
+            width: 16px;
+            height: 16px;
+        }
+
+        label {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            img {
+                width: 24px;
+                height: 17px;
+                border-radius: 4px;
+                user-select: none;
+            }
+        }
+    }
+
+
+    &__format, &__languages, &__with_substription, &__highEstimation, &__discount {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin-top: 15px;
+    }
+
+    &__highEstimation, &__discount {
+
+        div {
+            display: flex;
+            justify-content: space-between;
+
+        }
+    }
+}

@@ -1,0 +1,75 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+
+        input,
+        textarea {
+            border: 1px solid rgba(128, 128, 128, 0.48);
+            border-radius: 5px;
+            height: 38px;
+            width: 300px;
+            outline: none;
+            text-indent: 7px;
+
+            &:focus,
+            &:active {
+                border-color: #0084FF;
+            }
+
+            &::file-selector-button {
+                font-weight: bold;
+                color: dodgerblue;
+                padding: 0.5em;
+                border: thin solid grey;
+                border-radius: 3px;
+                border: 0;
+                cursor: pointer;
+
+                transition: background-color .2s ease-in-out;
+
+                &:hover {
+                    background-color: #00000026;
+                }
+            }
+        }
+
+        .image,
+        .file {
+            border: 0;
+        }
+
+        textarea {
+            text-indent: 6px;
+            height: auto;
+            padding: 3px;
+        }
+    }
+
+    &__selectBlinking {
+        caret-color: transparent;
+    }
+
+    .button {
+        width: 100%;
+        padding: 20px;
+        font-size: 19px;
+        border: 0;
+        background-color: #0084FF;
+
+        color: #fff;
+        border-radius: 7px;
+        margin-bottom: 40px;
+        cursor: pointer;
+
+        transition: background-color .2s ease-in-out;
+
+        &:hover {
+            background-color: #0084ffa5;
+        }
+    }
+}

@@ -1,0 +1,60 @@
+.basketBuy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 400px;
+
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 24px;
+
+
+
+    &__order_btn {
+        width: 386px;
+        height: 54px;
+        border: 0;
+        border-radius: 12px;
+        background-color: #10C44C;
+        color: #fff;
+        font-size: 17px;
+        font-weight: 500;
+        cursor: pointer;
+
+        transition: background-color .07s ease-in;
+
+        &:hover {
+            background-color: #1cde5c;
+        }
+    }
+
+    &__access_way {
+        color: #868686;
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+    &__mybasket, &__books, &__discount {
+
+        display: flex;
+        justify-content: space-between;
+        margin-top: 12px;
+
+
+        h3 {
+            font-weight: 500;
+            font-size: 14px;
+            padding: 0;
+            margin: 0;
+        }
+
+        span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            span {
+                font-size: 13px;
+            }
+        } 
+    }
+}

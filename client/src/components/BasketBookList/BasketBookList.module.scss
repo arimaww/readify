@@ -1,0 +1,56 @@
+.book_list {
+    &__item {
+        display: flex;
+        align-items: center;
+        padding: 24px;
+        gap: 22px;
+        background-color: #fff;
+        border-radius: 12px;
+        margin-bottom: 30px;
+
+        h3{
+            padding: 5px 5px;
+            margin: 0;
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        img {
+            width: 128px;
+            height: 128px;
+        }
+    }
+
+
+
+    &__buttons {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    &__btn {
+        border: 0;
+        padding: 8px;
+        border-radius: 7px;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        background-color: rgb(224, 0, 0);
+
+        transition: background-color .2s ease-in;
+
+        &:hover {
+            background-color: rgb(255, 15, 15);
+        }
+    }
+
+    &__add_favorite {
+        color: red;
+    }
+
+    &__remove_favorite, &__add_favorite {
+        font-size: 23px;
+    }
+    
+}

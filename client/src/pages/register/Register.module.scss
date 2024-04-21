@@ -1,0 +1,58 @@
+.register {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+
+    .form {
+        h2 {
+            user-select: none;
+            text-align: center;
+        }
+        &__item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-top: 12px;
+
+            label {
+                user-select: none;
+            }
+
+            input {
+                outline: none;
+                width: 250px;
+                height: 29px;
+                border: 1px solid rgba(0, 0, 0, 0.572);
+                border-radius: 6px;
+                text-indent: 7px;
+            }
+        }
+        button {
+            font-size: 16px;
+            outline: none;
+            margin-top: 9px;
+            border-radius: 6px;
+            background-color: #0084ff;
+            border: 0;
+            color: #fff;
+            padding: 9px;
+            cursor: pointer;
+
+            transition: background-color .2s ease-in-out;
+
+            &:hover {
+                background-color: #1d76be;
+            }
+        }
+
+        &__error {
+            background-color: rgba(255, 0, 0, 0.595);
+            border-radius: 7px;
+            padding: 7px;
+            width: 240px;
+            text-align: center;
+            font-weight: 500;
+            font-size: 13px;
+        }
+    }
+}

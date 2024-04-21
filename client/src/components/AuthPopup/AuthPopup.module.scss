@@ -1,0 +1,26 @@
+.authpopup {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    button {
+        border: 0;
+        height: 30px;
+        cursor: pointer;
+        outline: none;
+        border-radius: 7px;
+
+        background-color: #000000cd;
+        
+
+        transition: background-color .1s ease-in-out;
+
+        a{
+            color: #fff;
+            text-decoration: none;
+        }
+
+        &:hover {
+            background-color: #0000005c;
+        }
+    }
+}

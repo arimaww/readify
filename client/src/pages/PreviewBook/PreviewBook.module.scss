@@ -1,0 +1,88 @@
+.preview {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 48px;
+
+    &__info {
+        display: flex;
+
+        img {
+            width: 150px;
+            height: 200px;
+        }
+    }
+
+
+    &__main {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        h1,
+        h3 {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 0;
+            padding: 0;
+
+            span {
+                font-weight: 400;
+            }
+        }
+
+        p {
+            padding: 0;
+            margin: 0;
+        }
+    }
+
+    &__buy {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        h2 {
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        button {
+            border: 0;
+            border-radius: 12px;
+            background-color: #3D3DC7;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            width: 270px;
+            height: 60px;
+            cursor: pointer;
+
+            transition: background-color .2s ease-in-out;
+
+            &:hover {
+                background-color: #3d3dc7b1;
+            }
+
+            &:first-child {
+                margin-bottom: 30px;
+            }
+
+            &:last-child {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #EAEAF9;
+                color: #3D3DC7;
+
+                transition: background-color .2s ease-in-out;
+
+                &:hover {
+                    background-color: #f3f3fd;
+                }
+            }
+        }
+    }
+}

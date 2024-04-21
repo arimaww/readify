@@ -1,0 +1,124 @@
+.navbar {
+    border: 1px solid rgba(255, 255, 255, 0.509);
+    background-color: rgb(255, 255, 255);
+    box-shadow: 1px 2px 30px rgba(0, 0, 0, 0.254);
+
+    .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 84px;
+        gap: 12px;
+
+        .logo {
+            font-size: 21px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #000;
+            text-decoration: none;
+        }
+
+        .search {
+            display: flex;
+            justify-content: center;
+            width: 70%;
+            margin: 0 auto;
+
+            input {
+                width: 70%;
+                height: 35px;
+                outline: none;
+                border-radius: 7px;
+                border: 1px solid #43009c;
+                text-indent: 11px;
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            button {
+                position: relative;
+                left: -30px;
+                background-color: #43009c;
+                border: 0;
+                color: #fff;
+                border-radius: 7px;
+                outline: none;
+                height: 40px;
+                cursor: pointer;
+                font-weight: 600;
+
+                transition: background-color .1s ease-in-out;
+
+                &:hover {
+                    background-color: #6100e0;
+                }
+            }
+        }
+    }
+
+    .categories {
+        &__button {
+            display: flex;
+            align-items: center;
+            background-color: #43009c;
+            border: 0;
+            color: #fff;
+            border-radius: 7px;
+            outline: none;
+            height: 40px;
+            cursor: pointer;
+            font-weight: 600;
+
+            transition: background-color .1s ease-in-out;
+
+            &:hover {
+                background-color: #6100e0;
+            }
+        }
+    }
+
+    .navigate {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+
+        &__item {
+            list-style: none;
+        }
+        button {
+            background-color: transparent;
+            border: 0;
+            cursor: pointer;
+            outline: none;
+            padding: 9px;
+            font-size: 16px;
+            &:hover {
+                background-color: #00000007;
+                border-radius: 12px;
+            }
+
+        }
+
+        &__link {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            color: #000;
+            font-weight: 500;
+            text-decoration: none;
+            padding: 9px;
+            
+
+            &:hover {
+                background-color: #00000007;
+                border-radius: 12px;
+            }
+
+
+        }
+    }
+}
