@@ -11,6 +11,7 @@ export const store = configureStore({
         auth,
         admin,
         book,
+        
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware()
     .concat(api.middleware)
