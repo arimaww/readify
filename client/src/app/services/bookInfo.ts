@@ -9,7 +9,7 @@ export const bookInfoApi = api.injectEndpoints({
             query: (data) => ({
                 url: "/bookInfo/getratings",
                 body: data,
-                method: "GET"
+                method: "POST"
             })
         }),
         setRating: builder.mutation<ResponseBookRatingsData, {userId: number, bookId: number, value: number}>({
