@@ -6,7 +6,7 @@ config();
 import userRoutes from './Routes/userRoutes'
 import bookRoutes from './Routes/bookRoutes'
 import basketRoutes from './Routes/basketRoutes'
-import bookInfo from './Routes/bookInfo'
+import bookInfo from './Routes/bookInfoRoutes'
 import path from 'path';
 
 const app = express();
