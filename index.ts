@@ -6,6 +6,7 @@ config();
 import userRoutes from './Routes/userRoutes'
 import bookRoutes from './Routes/bookRoutes'
 import basketRoutes from './Routes/basketRoutes'
+import bookInfo from './Routes/bookInfo'
 import path from 'path';
 
 const app = express();
@@ -22,6 +23,7 @@ app.use(express.urlencoded({extended: true}));
 app.use('/api/user/', userRoutes)
 app.use('/api/book/', bookRoutes)
 app.use('/api/basket/', basketRoutes)
+app.use('/api/bookInfo/', bookInfo)
 
 
 app.listen(PORT, () => {
