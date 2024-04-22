@@ -44,7 +44,7 @@ export const bookInfoApi = api.injectEndpoints({
         getAllCommentsForBook: builder.query<ResponseCommentsData[], { bookId: number }>({
             query: data => ({
                 url: "/bookInfo/getAllCommentsForBook",
-                body: data.bookId,
+                body: data,
                 method: "POST"
             })
         })
