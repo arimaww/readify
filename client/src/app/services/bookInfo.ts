@@ -1,11 +1,11 @@
 import { api } from "./api";
 import { Rating } from "@prisma/client";
 
-export type ResponseBookRatingsData = Rating[] | Rating
+export type ResponseBookRatingsData = Rating
 
 export const bookInfoApi = api.injectEndpoints({
     endpoints: (builder) => ({
-        getBookRatingsById: builder.query<ResponseBookRatingsData, {bookId: number}>({
+        getBookRatingsById: builder.query<ResponseBookRatingsData[], {bookId: number}>({
             query: (data) => ({
                 url: "/bookInfo/getratings",
                 body: data,
