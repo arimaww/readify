@@ -7,7 +7,7 @@ router.post('/getratings', getBookRatingsById);
 router.post('/setrating', setRating);
 router.delete('/removeRating', removeRating);
 router.post('/leaveComment', leaveComment)
-router.post('/removeComment', removeComment)
+router.delete('/removeComment', removeComment)
 router.post('/getAllCommentsForBook', getAllCommentsForBook)
 
 export default router;
