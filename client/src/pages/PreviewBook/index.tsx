@@ -2,16 +2,37 @@ import { useParams } from "react-router-dom"
 import { useGetBookByIdQuery } from "../../app/services/book";
 import styles from './PreviewBook.module.scss';
 import { AuthorLoad } from "../../components/AuthorLoad";
-
+import ReactStars from "react-star-ratings";
+import { useGetBookRatingsByIdQuery } from "../../app/services/bookInfo";
 const PreviewBook = () => {
   const { bookId } = useParams();
   const book = useGetBookByIdQuery({ bookId: Number(bookId) })
 
+  const ratings = useGetBookRatingsByIdQuery({ bookId: parseInt(bookId!) });
+
+  let avgRating = 0;
+  if (typeof ratings.data !== "undefined")
+    avgRating = ratings.data?.reduce((prevVal, curVal) => prevVal += Number(curVal.value), 0) / ratings.data?.length;
+
+
   return (
     <div className={styles.preview}>
       <div className={styles.preview__info}>
+        <div className={styles.preview__rating}>
+          <ReactStars
+            rating={avgRating}
+            starDimension="23px"
+            starRatedColor="#F0DC00"
+            starSpacing="1px"
+          />
+          <div>
+            <span>{ratings.data?.length} </span>
+            <span>отзыва</span>
+          </div>
+        </div>
+
         <img src={book.data?.picture ?? ""} alt="" />
-        <div>sad</div>
+
       </div>
       <div className={styles.preview__main}>
         <h1>{book.data?.bookName}</h1>
