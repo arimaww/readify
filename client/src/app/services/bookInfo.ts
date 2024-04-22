@@ -13,6 +13,12 @@ export const bookInfoApi = api.injectEndpoints({
                 method: "POST"
             })
         }),
+        getAllRatings: builder.query<ResponseBookRatingsData[], void>({
+            query: () => ({
+                url: "/bookInfo/getAllRatings",
+                method: "GET"
+            })
+        }),
         setRating: builder.mutation<ResponseBookRatingsData, { userId: number, bookId: number, value: number }>({
             query: (data) => ({
                 url: "/bookInfo/setRating",
@@ -48,9 +54,16 @@ export const bookInfoApi = api.injectEndpoints({
                 method: "POST"
             })
         })
+        
     })
 })
 
-export const { endpoints: { getBookRatingsById, setRating, removeRating, getAllCommentsForBook, leaveComment, removeComment } } = bookInfoApi;
+export const { endpoints: { getBookRatingsById, setRating, removeRating, getAllCommentsForBook, leaveComment, removeComment, getAllRatings } } = bookInfoApi;
 
-export const { useGetBookRatingsByIdQuery, useSetRatingMutation, useRemoveRatingMutation, useGetAllCommentsForBookQuery, useLeaveCommentMutation, useRemoveCommentMutation } = bookInfoApi
+export const { useGetBookRatingsByIdQuery,
+     useSetRatingMutation,
+     useRemoveRatingMutation,
+     useGetAllCommentsForBookQuery,
+     useLeaveCommentMutation,
+     useRemoveCommentMutation,
+     useGetAllRatingsQuery } = bookInfoApi
