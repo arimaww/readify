@@ -67,22 +67,37 @@ export const authApi = api.injectEndpoints({
                 method: "POST"
             }),
             providesTags: ['Favorite']
-            
+
         }),
-        removeFromFavorite: builder.mutation<string, {userId: number | undefined, bookId: number}>({
+        removeFromFavorite: builder.mutation<string, { userId: number | undefined, bookId: number }>({
             query: (data) => ({
                 url: "/book/favorite/removeFromFavorite",
                 body: data,
                 method: "DELETE"
             }),
             invalidatesTags: ['Favorite']
+        }),
+        getAllUsers: builder.query<User[], void>({
+            query: () => ({
+                url: "/user/allUsers",
+                method: "GET"
+            })
         })
     })
 })
 
 
-export const { useRemoveFromFavoriteMutation, useRegisterMutation, useLoginMutation, useCurrentQuery, useUpdateMutation, useDeleteUserMutation, useSetUserAvatarMutation, useAddToFavoriteMutation, useGetUserFavoritesQuery } = authApi;
+export const { useRemoveFromFavoriteMutation,
+    useRegisterMutation,
+    useLoginMutation,
+    useCurrentQuery,
+    useUpdateMutation,
+    useDeleteUserMutation,
+    useSetUserAvatarMutation,
+    useAddToFavoriteMutation,
+    useGetUserFavoritesQuery,
+    useGetAllUsersQuery } = authApi;
 
 export const {
-    endpoints: { login, register, current, update, deleteUser, setUserAvatar, addToFavorite, getUserFavorites, removeFromFavorite }
+    endpoints: { login, register, current, update, deleteUser, setUserAvatar, addToFavorite, getUserFavorites, removeFromFavorite, getAllUsers }
 } = authApi;
