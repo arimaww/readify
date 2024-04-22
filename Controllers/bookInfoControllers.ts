@@ -20,6 +20,18 @@ export const getBookRatingsById = async (req: Request, res:Response) => {
     } 
 }
 
+export const getAllRatings = async (req: Request, res:Response) => {
+    try{
+        const ratings = await prisma.rating.findMany();
+
+        return res.status(200).json(ratings)
+    }
+    catch(err) {
+        console.log(err);
+        res.status(500).json({message: "Fatal error " + err});
+    } 
+}
+
 
 export const setRating = async (req: Request, res:Response) => {
     try{
