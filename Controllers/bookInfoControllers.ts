@@ -67,3 +67,63 @@ export const removeRating = async (req: Request, res: Response) => {
         res.status(500).json({message: "Fatal error " + err});
     }
 }
+
+export const leaveComment = async (req: Request, res: Response) => {
+    try{
+        const {userId, bookId, text} = req.body;
+        if(!userId || !bookId || !text)
+            return res.status(400).json({message: "Все поля обязательны к заполнению"});
+
+        const comment = await prisma.comments.create({
+            data: {
+                text: text,
+                bookId: parseInt(bookId),
+                userId: parseInt(userId)
+            }
+        })
+
+        return res.status(200).json(comment)
+    }
+    catch(err) {
+        console.log(err);
+        res.status(500).json({message: "Fatal error " + err});
+    }
+}
+
+export const removeComment = async (req: Request, res: Response) => {
+    try{
+        const {commentId} = req.body;
+
+        if(!commentId)
+            return res.status(400).json({message: "Все поля обязательны к заполнению"});
+
+        await prisma.comments.delete({
+            where: {
+                commentId: parseInt(commentId)
+            }
+        })
+
+        return res.status(200).json({message: "Комментарий успешно удалён"});
+    }
+    catch(err) {
+        console.log(err);
+        res.status(500).json({message: "Fatal error " + err});
+    }
+}
+
+
+export const getAllCommentsForBook = async (req: Request, res: Response) => {
+    try{
+        const {bookId} = req.body;
+
+        const comments = await prisma.comments.findMany({where: {
+            bookId: parseInt(bookId)
+        }})
+
+        return res.status(200).json(comments)
+    }
+    catch(err) {
+        console.log(err);
+        res.status(500).json({message: "Fatal error " + err});
+    }
+}
