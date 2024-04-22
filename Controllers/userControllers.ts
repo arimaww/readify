@@ -185,6 +185,18 @@ export const deleteUser = async (req:Request, res: Response) => {
     }
 }
 
+
+export const getAllUsers = async (req: Request, res: Response) => {
+    try{
+        const users = await prisma.user.findMany();
+        return res.status(200).json(users);
+    }
+    catch(err) {
+        console.log(err);
+        res.status(500).json({message: "Fatal Error " + err});
+    }
+}
+
 // export const uploadImage = async(req: Request, res: Response) => {
 //     try {
 //         const {userId} = req.body;
