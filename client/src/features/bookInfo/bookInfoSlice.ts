@@ -26,6 +26,8 @@ export const bookInfoSlice = createSlice({
             state.comment = action.payload;
         }).addMatcher(bookInfoApi.endpoints.leaveComment.matchFulfilled, (state, action) => {
             state.comment = action.payload;
+        }).addMatcher(bookInfoApi.endpoints.getAllRatings.matchFulfilled, (state, action) => {
+            state.rating = action.payload;
         })
     }
 })
