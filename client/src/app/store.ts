@@ -3,6 +3,7 @@ import { api } from './services/api'
 import auth from '../features/auth/authSlice'
 import admin from '../features/admin/adminSlice'
 import book from '../features/book/bookSlice'
+import purchase from '../features/purchase/purchaseSlice'
 import { listenerMiddleware, listenerRegisterMiddleware } from '../middleware/auth'
 
 export const store = configureStore({
@@ -11,7 +12,7 @@ export const store = configureStore({
         auth,
         admin,
         book,
-        
+        purchase
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware()
     .concat(api.middleware)
