@@ -85,8 +85,15 @@ export const leaveComment = async (req: Request, res: Response) => {
         const {userId, bookId, text} = req.body;
         if(!userId || !bookId || !text)
             return res.status(400).json({message: "Все поля обязательны к заполнению"});
-
-        const comment = await prisma.comments.create({
+        let comment = await prisma.comments.findFirst({
+            where: {
+                bookId: parseInt(bookId),
+                userId: parseInt(userId)
+            }
+        })
+        if(comment)
+            return res.status(400).json({message: "Вы уже оставляли комментарий к этой книге."})
+        comment = await prisma.comments.create({
             data: {
                 text: text,
                 bookId: parseInt(bookId),
