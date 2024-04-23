@@ -51,15 +51,16 @@ Table User {
   password String [not null]
   profilePhoto String
   dateOfBirth DateTime [not null]
+  wallet Decimal [not null, default: 0]
   role Role [not null, default: 'USER']
   basket Basket [not null]
   favorite Favorite [not null]
   purchase Purchase [not null]
   author Author
   rating Rating [not null]
+  comments Comments [not null]
   createdAt DateTime [default: `now()`, not null]
-  updatedAt DateTime [not null]
-  Comments Comments [not null]
+  updatedAt DateTime [default: `now()`, not null]
 }
 
 Table Basket {
@@ -119,6 +120,8 @@ Table Comments {
   bookId Int [not null]
   user User [not null]
   userId Int [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [default: `now()`, not null]
 }
 
 Enum Languages {

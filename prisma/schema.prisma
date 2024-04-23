@@ -84,6 +84,7 @@ model User {
   password     String
   profilePhoto String?
   dateOfBirth  DateTime
+  wallet       Decimal @default(0.00)
   role         Role     @default(USER)
 
   basket   Basket[]
@@ -91,10 +92,10 @@ model User {
   purchase Purchase[]
   author   Author?
   rating   Rating[]
+  comments Comments[]
 
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  Comments  Comments[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 model Basket {
@@ -145,7 +146,6 @@ model Sale {
   bookId   Int
 }
 
-
 model Rating {
   ratingId Int @id @unique @default(autoincrement())
 
@@ -167,4 +167,7 @@ model Comments {
 
   user   User @relation(fields: [userId], references: [userId])
   userId Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
