@@ -1,0 +1,36 @@
+.createComment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 100px;
+
+
+    textarea {
+        width: 99%;
+        text-indent: 11px;
+        letter-spacing: 1px;
+        padding: 15px 1%;
+        border: 0;
+        border-radius: 12px;
+        outline: none;
+        box-shadow: 0 0 10px #0000002b;
+
+        font-size: 14px;
+        font-family: sans-serif;
+    }
+    button {
+        border: 0;
+        background-color: rgb(26, 106, 255);
+        color: #fff;
+        font-size: 16px;
+        padding: 12px;
+        border-radius: 12px;
+        cursor: pointer;
+        
+        transition: background-color .2s linear;
+        &:hover {
+            background-color: rgb(45, 133, 255);
+        }
+    }
+}

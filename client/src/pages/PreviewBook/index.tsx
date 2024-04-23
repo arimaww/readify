@@ -5,6 +5,7 @@ import { AuthorLoad } from "../../components/AuthorLoad";
 import ReactStars from "react-star-ratings";
 import { useGetBookRatingsByIdQuery } from "../../app/services/bookInfo";
 import { CommentsList } from "../../components/CommenstList";
+import { CreateComment } from "../../components/CreateComment";
 const PreviewBook = () => {
   const { bookId } = useParams();
   const book = useGetBookByIdQuery({ bookId: Number(bookId) })
@@ -59,9 +60,12 @@ const PreviewBook = () => {
         </div>
       </div>
 
-      <div><h3>Комментарии к книге</h3>
-      <CommentsList /></div>
-      
+      <div>
+        <h3>Комментарии к книге</h3>
+        <CommentsList />
+        <CreateComment />
+      </div>
+
     </div>
   )
 }
