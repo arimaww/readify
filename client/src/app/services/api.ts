@@ -20,6 +20,6 @@ export const api = createApi({
     reducerPath: "splitApi",
     baseQuery: baseQueryWithRetry,
     refetchOnMountOrArgChange: true,
-    tagTypes: ["Favorite", "Basket"],
+    tagTypes: ["Favorite", "Basket", "Comments", "Ratings"],
     endpoints: () => ({}),
 })
