@@ -40,6 +40,7 @@ export const ProfilePopup = () => {
             <Link to={'/support'}>
                 Чат с поддержкой
             </Link>
+            <div>Баланс: {Number(user?.wallet)} ₽</div>
             {!resultChangeRole.isSuccess ? user?.role === "USER" ? (<button onClick={onBeAuthorClick}>
                 {resultChangeRole.isLoading ? "Загрузка..." : "Стать автором"}
             </button>) : "" : ""}
