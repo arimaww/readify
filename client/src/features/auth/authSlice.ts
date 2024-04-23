@@ -5,13 +5,15 @@ import { RootState } from "../../app/store"
 
 
 interface InitialState {
-    user: User & {token: string} | User[] | null;
+    user: User & {token: string} | null;
+    users: User[] | null
     isAuthenticated: boolean;
     favorite: Favorite[] | null
 }
 
 const initialState: InitialState = {
     user: null,
+    users: null,
     isAuthenticated: false,
     favorite: null
 }
@@ -44,7 +46,7 @@ const slice = createSlice({
         }).addMatcher(authApi.endpoints.getUserFavorites.matchFulfilled, (state, action) => {
             state.favorite = action.payload;
         }).addMatcher(authApi.endpoints.getAllUsers.matchFulfilled, (state, action) => {
-            state.user = action.payload;
+            state.users = action.payload;
         })
     }
 })
