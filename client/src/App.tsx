@@ -14,6 +14,7 @@ import Home from './pages/Home';
 import { useState } from 'react';
 import Favorite from './pages/Favorite';
 import { Basket } from './pages/Basket';
+import { MyPurchases } from './pages/MyPurchases';
 
 const App = () => {
   const [search, setSearch] = useState<string>("");
@@ -34,6 +35,7 @@ const App = () => {
           <Route path='/previewBook/:bookId' element={<PreviewBook />} />
           <Route path='/favorite' element={<Favorite />} />
           <Route path='/basket' element={<Basket />} />
+          <Route path='/mypurchases' element={<MyPurchases />} />
           <Route path='*' element={<Navigate to={"/"} />} />
         </Routes>
       </div>
