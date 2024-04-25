@@ -58,7 +58,7 @@ export const Sidebar = () => {
           <Link to={'/mycab'}>Личные данные</Link>
           <Link to={'/'}>Интересы</Link>
           <Link to={'/'}>Избранное</Link>
-          <Link to={'/'}>Мои покупки</Link>
+          <Link to={'/mypurchases'}>Мои покупки</Link>
           {admin?.role === "AUTHOR" || user?.role === "AUTHOR" ? <Link to={`/author_cabinet/${user?.userId}`}>Кабинет автора</Link> : ""}
           <Link to={'/'}>Частые вопросы</Link>
           <Link to={'/'}>Чат с поддержкой</Link>
