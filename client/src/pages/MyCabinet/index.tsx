@@ -2,13 +2,13 @@
 import { useSelector } from 'react-redux'
 import styles from './MyCabinet.module.scss'
 import { selectUser } from '../../features/auth/authSlice'
-import {  useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { UserData, useUpdateMutation } from '../../app/services/auth'
 import { useSnackbar } from 'notistack'
 import { Sidebar } from '../../components/Sidebar'
-import  { ImageListType } from 'react-images-uploading';
+import { ImageListType } from 'react-images-uploading';
 import { TUserInputs } from '../../types'
 import { isErrorWithMessage } from '../../utils/is-error-with-message'
 import EditForm from '../../components/EditForm'
@@ -54,7 +54,7 @@ const MyCabinet = () => {
       }
     }
   }
-  const onSubmit: SubmitHandler<TUserInputs> = (data: TUserInputs) => updateUser(data as UserData & {profilePhoto: File})
+  const onSubmit: SubmitHandler<TUserInputs> = (data: TUserInputs) => updateUser(data as UserData & { profilePhoto: File })
   const onChange = (imageList: ImageListType) => setAvatar(imageList)
 
 
@@ -69,19 +69,19 @@ const MyCabinet = () => {
       <Sidebar />
       <div className={styles.mycab}>
 
-      <EditForm avatar={avatar} 
-      dateOfBirth={dateOfBirth} 
-      error={error} 
-      onChange={onChange} 
-      password={password} 
-      repeatPassword={repeatPassword} 
-      resultUpdate={resultUpdate} 
-      setPassword={setPassword}
-      setRepeatPassword={setRepeatPassword}
-      handleSubmit={handleSubmit}
-      onSubmit={onSubmit}
-      register={register}
-      />
+        <EditForm avatar={avatar}
+          dateOfBirth={dateOfBirth}
+          error={error}
+          onChange={onChange}
+          password={password}
+          repeatPassword={repeatPassword}
+          resultUpdate={resultUpdate}
+          setPassword={setPassword}
+          setRepeatPassword={setRepeatPassword}
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          register={register}
+        />
       </div>
     </div>
   )
