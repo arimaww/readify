@@ -1,15 +1,28 @@
+import { Book, Purchase } from '@prisma/client'
 import styles from './BasketBuy.module.scss'
+import { LoadingPage } from '../LoadingPage'
+import { useSelector } from 'react-redux'
+import { selectUser } from '../../features/auth/authSlice'
 
 
 type TBasketBuy = {
   countOfBooks: number,
-  fullPrice: number
+  fullPrice: number,
+  clickPurchase: (data: Omit<Purchase, "purchasedId">[]) => Promise<void>,
+  basketList: Book[] | undefined,
 }
+type Sd = Omit<Purchase, "purchasedId">[]
+const BasketBuy = ({countOfBooks, fullPrice, clickPurchase, basketList}:TBasketBuy) => {
+  let willBePurchased:Sd = []
+  const user = useSelector(selectUser);
+  if(!basketList) return <LoadingPage />
+  for(let i = 0; i < basketList?.length; i++) {
+    willBePurchased.push({bookId: basketList[i].bookId, userId: Number(user?.userId)})
+  }
 
-const BasketBuy = ({countOfBooks, fullPrice}:TBasketBuy) => {
   return (
     <article className={styles.basketBuy}>
-      <button className={styles.basketBuy__order_btn}>Перейти к оформлению</button>
+      <button className={styles.basketBuy__order_btn} onClick={() => clickPurchase(willBePurchased)}>Совершить покупку</button>
       <p className={styles.basketBuy__access_way}>Доступные способы оплаты можно выбрать при оформлении заказа</p>
       <div>
         <div className={styles.basketBuy__mybasket}>
