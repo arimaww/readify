@@ -6,18 +6,27 @@ import ReactStars from "react-star-ratings";
 import { useGetBookRatingsByIdQuery } from "../../app/services/bookInfo";
 import { CommentsList } from "../../components/CommenstList";
 import { CreateComment } from "../../components/CreateComment";
+import { useGetAllPurchasesByUserIdQuery } from "../../app/services/purchase";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../features/auth/authSlice";
+
 const PreviewBook = () => {
   const { bookId } = useParams();
   const book = useGetBookByIdQuery({ bookId: Number(bookId) })
 
   const ratings = useGetBookRatingsByIdQuery({ bookId: parseInt(bookId!) });
+  const user = useSelector(selectUser);
+  const purchases = useGetAllPurchasesByUserIdQuery({userId: Number(user?.userId)})
+  const isThisBookPurchases = purchases.data?.filter(el => el.bookId === Number(bookId))
+
+  
 
   let avgRating = 0;
   if (typeof ratings.data !== "undefined" && ratings.data.length > 0)
     avgRating = ratings.data?.reduce((prevVal, curVal) => prevVal += Number(curVal.value), 0) / ratings.data?.length;
 
 
-  return (
+   return (
     <div className={styles.preview}>
       <div className={styles.preview__main}>
         <div className={styles.preview__info}>
@@ -46,9 +55,9 @@ const PreviewBook = () => {
           <h3>Описание<p><span>{book.data?.description}</span></p></h3>
         </div>
         <div className={styles.preview__buy}>
-          <button>Оформить по подписке</button>
-          <h2>{book.data?.cost} ₽</h2>
-          <button>Купить и скачать</button>
+          {isThisBookPurchases?.length! > 0 ? <button>К списку купленных книг</button> : <button>Оформить по подписке</button>}
+          {isThisBookPurchases?.length! > 0 ? <button>Скачать книгу</button> : (<div><button>Купить и скачать</button> <h2>{book.data?.cost} ₽</h2></div>)}
+
 
           <button>
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 20 20">
