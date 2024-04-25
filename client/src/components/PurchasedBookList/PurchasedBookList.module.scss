@@ -1,0 +1,42 @@
+.purchasedBookList {
+    width: 100%;
+    margin-top: 40px;
+
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px;
+        width: 100%;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 0 12px #0000001f;
+    }
+
+    &__about {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    &__button {
+        button {
+            border: 0;
+            border-radius: 7px;
+            width: 128px;
+            height: 44px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #1677FF;
+            outline: none;
+            color: #fff;
+            
+            transition: all .2s ease-in-out;
+
+            &:hover {
+                background-color: #0d7adf;
+                box-shadow: 0 0 12px #005eff77;
+            }
+        }
+    }
+}
