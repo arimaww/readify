@@ -7,6 +7,8 @@ import { selectUser } from '../../features/auth/authSlice'
 import { isErrorWithMessage } from '../../utils/is-error-with-message'
 import { useState } from 'react'
 import { BasketResultData, useAddToUserBasketMutation, useGetUserBasketQuery, useRemoveBookFromUserBasketMutation } from '../../app/services/basket'
+import { useGetBookListQuery } from '../../app/services/book'
+import { useSnackbar } from 'notistack'
 
 type TBookListCards = {
     searchData: Book[] | undefined,
@@ -32,11 +34,17 @@ export const BookListCards = ({ searchData, onDeleteButtonClick, forSomeAuthor }
 
     const bask = baskets.data?.filter(book => book.userId === user?.userId)
 
-    
+    const {enqueueSnackbar} = useSnackbar();
+
+    const bookList = useGetBookListQuery({id: user?.userId})
 
     const handleBasketSubmit = async (data: BasketResultData) => {
         try{
             setError("");
+
+            if(bookList.data?.some(el => el.bookId === data.bookId)) {
+                return enqueueSnackbar("Вы не можете купить собственную книгу", {variant: "info"})
+            }
 
             await basket(data).unwrap();
 
