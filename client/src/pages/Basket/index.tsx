@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { useGetUserBasketQuery } from "../../app/services/basket"
 import { BasketBookList } from "../../components/BasketBookList"
 import { selectUser } from "../../features/auth/authSlice";
-import { useGetBookListQuery } from "../../app/services/book";
+import { useGetAllBooksQuery } from "../../app/services/book";
 import { useGetUserFavoritesQuery } from "../../app/services/auth";
 import BasketBuy from "../../components/BasketBuy";
 import styles from './Basket.module.scss'
@@ -11,22 +11,22 @@ import { useCreatePurchaseMutation } from "../../app/services/purchase";
 import { Purchase } from "@prisma/client";
 import { isErrorWithMessage } from "../../utils/is-error-with-message";
 import { useSnackbar } from "notistack";
-import { LoadingPage } from "../../components/LoadingPage";
 import { useNavigate } from "react-router-dom";
 
 export const Basket = () => {
-  const [purchaseBook, resultPurchaseBook] = useCreatePurchaseMutation();
+  const [purchaseBook] = useCreatePurchaseMutation();
   const [error, setError] = useState<string>("");
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
   
   const basket = useGetUserBasketQuery();
   const user = useSelector(selectUser)
-  const book = useGetBookListQuery({ id: user?.userId })
-  const basketList = book.data?.filter(book => basket.data?.some(el => book.bookId == el.bookId));
+  const book = useGetAllBooksQuery()
+  const basketList = book.data?.filter(book => basket.data?.some(el => book.bookId == el.bookId && el.userId == user?.userId));
   const favorites = useGetUserFavoritesQuery({ userId: user?.userId });
   const entryPrice = basketList?.reduce((val, acc) => val += acc.cost, 0);
 
+  console.log(basketList)
   
 
   const handlePurchaseBook = async (data: Omit<Purchase, "purchasedId">[]) => {
@@ -47,9 +47,6 @@ export const Basket = () => {
     }
   }
 
-  if(!basketList) return <LoadingPage />
-
-  if(resultPurchaseBook.isLoading) return <LoadingPage />
 
   return (
 
@@ -58,7 +55,7 @@ export const Basket = () => {
       <div className={styles.basket__basketBookList}>
         <BasketBookList basketList={basketList} favorites={favorites.data} />
       </div>
-      {basketList?.length > 0 ? <div>
+      {basketList?.length! > 0 ? <div>
         <BasketBuy countOfBooks={basketList?.length!} fullPrice={entryPrice!} clickPurchase={handlePurchaseBook} basketList={basketList} />
       </div> : <></>}
     </div>

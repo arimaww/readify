@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom"
-import { useGetBookByIdQuery } from "../../app/services/book";
+import { useGetAuthorByIdQuery, useGetBookByIdQuery } from "../../app/services/book";
 import styles from './PreviewBook.module.scss';
 import { AuthorLoad } from "../../components/AuthorLoad";
 import ReactStars from "react-star-ratings";
@@ -9,6 +9,7 @@ import { CreateComment } from "../../components/CreateComment";
 import { useGetAllPurchasesByUserIdQuery } from "../../app/services/purchase";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../features/auth/authSlice";
+import { LoadingPage } from "../../components/LoadingPage";
 
 const PreviewBook = () => {
   const { bookId } = useParams();
@@ -16,17 +17,21 @@ const PreviewBook = () => {
 
   const ratings = useGetBookRatingsByIdQuery({ bookId: parseInt(bookId!) });
   const user = useSelector(selectUser);
-  const purchases = useGetAllPurchasesByUserIdQuery({userId: Number(user?.userId)})
+  const purchases = useGetAllPurchasesByUserIdQuery({ userId: Number(user?.userId) })
   const isThisBookPurchases = purchases.data?.filter(el => el.bookId === Number(bookId))
 
-  
+  const bookAuthor = useGetAuthorByIdQuery({ authorId: book.data?.authorId });
+
 
   let avgRating = 0;
   if (typeof ratings.data !== "undefined" && ratings.data.length > 0)
     avgRating = ratings.data?.reduce((prevVal, curVal) => prevVal += Number(curVal.value), 0) / ratings.data?.length;
 
 
-   return (
+  if(!bookAuthor || !book || !ratings || !purchases)
+    return <LoadingPage />
+
+  return (
     <div className={styles.preview}>
       <div className={styles.preview__main}>
         <div className={styles.preview__info}>
@@ -49,7 +54,7 @@ const PreviewBook = () => {
         <div className={styles.preview__second}>
           <h1>{book.data?.bookName}</h1>
           <h3><span>Автор</span>
-            <AuthorLoad authorId={1} />
+            <AuthorLoad author={bookAuthor.data} />
           </h3>
           <h3>О книге<p><span>{book.data?.about}</span></p></h3>
           <h3>Описание<p><span>{book.data?.description}</span></p></h3>

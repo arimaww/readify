@@ -25,10 +25,14 @@ export const BookListCards = ({ searchData, onDeleteButtonClick, forSomeAuthor }
     const user = useSelector(selectUser);
     const [_, setError] = useState<string>("");
     const [basket] = useAddToUserBasketMutation();
+
     const [removeFromBasket] = useRemoveBookFromUserBasketMutation();
 
-    const bask = useGetUserBasketQuery();
+    const baskets = useGetUserBasketQuery();
 
+    const bask = baskets.data?.filter(book => book.userId === user?.userId)
+
+    
 
     const handleBasketSubmit = async (data: BasketResultData) => {
         try{
@@ -113,7 +117,7 @@ export const BookListCards = ({ searchData, onDeleteButtonClick, forSomeAuthor }
                         {favorites.data?.some(el => el.bookId === book.bookId) ? <i style={{cursor: "pointer"}} onClick={() => handleRemoveFromFavorite({ userId: user?.userId, bookId: book.bookId })} className={`bi bi-heart-fill ${styles.remove_favorite}`}></i>
                             : (<i style={{cursor: "pointer"}} onClick={() => handleAddToFavorite({ userId: user?.userId, bookId: book.bookId })} className={`bi bi-heart ${styles.add_to_favorite}`}></i>)}
                         
-                        {bask.data?.some(el => el.bookId === book.bookId) ? <button style={{backgroundColor: 'red'}} onClick={() => handleRemoveFromBasket({bookId: book.bookId, userId: user?.userId!})}>Убрать с <i className={`bi bi-bag ${styles.btn_buy}`}></i></button> : 
+                        {bask?.some(el => el.bookId === book.bookId) ? <button style={{backgroundColor: 'red'}} onClick={() => handleRemoveFromBasket({bookId: book.bookId, userId: user?.userId!})}>Убрать с <i className={`bi bi-bag ${styles.btn_buy}`}></i></button> : 
                         (<button onClick={() => handleBasketSubmit({bookId: book.bookId, userId: user?.userId!})}>В корзину<i className={`bi bi-bag ${styles.btn_buy}`}></i></button>)}
                         </div>}
                 </div>

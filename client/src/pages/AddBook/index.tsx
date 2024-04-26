@@ -9,6 +9,7 @@ import { IBookInputs } from '../../types'
 import AddBookForm from '../../components/BookForm'
 import { useSnackbar } from 'notistack'
 import { useNavigate } from 'react-router-dom'
+import { LoadingPage } from '../../components/LoadingPage'
 
 export interface ISelectOptions {
     value: number,
@@ -76,6 +77,12 @@ const AddBook = () => {
     const onSubmit: SubmitHandler<IBookInputs> = data => {
         createBook({ ...data, authorId: user!.userId })
     }
+
+
+    if(!categoryOptions || !control || !user || !typeOptions)
+        return <LoadingPage />
+
+
     return (
         <div className={styles.addbook}>
             <AddBookForm
