@@ -4,11 +4,13 @@ import { basketApi } from "../../app/services/basket"
 
 
 type InitialState = {
-    basket: Basket | Basket[] | null
+    basket: Basket | Basket[] | null,
+    message: string | null | void
 }
 
 const initialState:InitialState = {
-    basket: null
+    basket: null,
+    message: null
 }
 
 export const basketSlice = createSlice({
@@ -18,6 +20,8 @@ export const basketSlice = createSlice({
     extraReducers: (builder) => {
         builder.addMatcher(basketApi.endpoints.getUserBasket.matchFulfilled, (state, action) => {
             state.basket = action.payload;
+        }).addMatcher(basketApi.endpoints.removeBookFromUserBasket.matchFulfilled, (state, action) => {
+            state.message = action.payload;
         })
     }
 })
