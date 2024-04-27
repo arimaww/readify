@@ -21,6 +21,7 @@ export type TData = {
     bookId: number
 }
 
+
 export const BookListCards = ({ searchData, onDeleteButtonClick, forSomeAuthor }: TBookListCards) => {
     const [addToFavorite] = useAddToFavoriteMutation();
     const [removeFromFavorite] = useRemoveFromFavoriteMutation();
@@ -34,23 +35,27 @@ export const BookListCards = ({ searchData, onDeleteButtonClick, forSomeAuthor }
 
     const bask = baskets.data?.filter(book => book.userId === user?.userId)
 
-    const {enqueueSnackbar} = useSnackbar();
+    const { enqueueSnackbar } = useSnackbar();
 
-    const bookList = useGetBookListQuery({id: user?.userId})
+    let bookList = null;
 
-    const handleBasketSubmit = async (data: BasketResultData) => {
-        try{
+    if (user?.role === "AUTHOR") 
+        bookList = useGetBookListQuery({ id: user?.userId })
+
+
+
+    const handleBasketSubmit = async (resultData: BasketResultData) => {
+        try {
             setError("");
-
-            if(bookList.data?.some(el => el.bookId === data.bookId)) {
-                return enqueueSnackbar("Вы не можете купить собственную книгу", {variant: "info"})
+            if (user?.role === "AUTHOR") {
+                if (bookList?.data?.some(el => el.bookId === resultData.bookId)) {
+                    return enqueueSnackbar("Вы не можете купить собственную книгу", { variant: "info" })
+                }
             }
-
-            await basket(data).unwrap();
-
+            await basket(resultData).unwrap();
         }
-        catch(err) {
-            if(isErrorWithMessage(err)) {
+        catch (err) {
+            if (isErrorWithMessage(err)) {
                 setError(err.data.message);
             }
             else {
@@ -60,13 +65,13 @@ export const BookListCards = ({ searchData, onDeleteButtonClick, forSomeAuthor }
     }
 
     const handleRemoveFromBasket = async (data: BasketResultData) => {
-        try{
+        try {
             setError("");
 
             await removeFromBasket(data).unwrap();
         }
-        catch(err) {
-            if(isErrorWithMessage(err)) {
+        catch (err) {
+            if (isErrorWithMessage(err)) {
                 setError(err.data.message);
             }
             else {
@@ -112,7 +117,7 @@ export const BookListCards = ({ searchData, onDeleteButtonClick, forSomeAuthor }
         <div className={styles.books__cards}>
             {searchData?.map(book => (
                 <div key={book?.bookId} className={styles.books__card} >
-                    
+
                     <Link to={`/previewBook/${book.bookId}`}>
                         <img src={book.picture!} alt="picture" />
                     </Link>
@@ -122,12 +127,12 @@ export const BookListCards = ({ searchData, onDeleteButtonClick, forSomeAuthor }
                         <button type="button" onClick={() => onDeleteButtonClick!(book.bookId)}>Delete</button>
                         <Link to={`/edit/${book.bookId}`}>Изменить</Link>
                     </div>) : <div>
-                        {favorites.data?.some(el => el.bookId === book.bookId) ? <i style={{cursor: "pointer"}} onClick={() => handleRemoveFromFavorite({ userId: user?.userId, bookId: book.bookId })} className={`bi bi-heart-fill ${styles.remove_favorite}`}></i>
-                            : (<i style={{cursor: "pointer"}} onClick={() => handleAddToFavorite({ userId: user?.userId, bookId: book.bookId })} className={`bi bi-heart ${styles.add_to_favorite}`}></i>)}
-                        
-                        {bask?.some(el => el.bookId === book.bookId) ? <button style={{backgroundColor: 'red'}} onClick={() => handleRemoveFromBasket({bookId: book.bookId, userId: user?.userId!})}>Убрать с <i className={`bi bi-bag ${styles.btn_buy}`}></i></button> : 
-                        (<button onClick={() => handleBasketSubmit({bookId: book.bookId, userId: user?.userId!})}>В корзину<i className={`bi bi-bag ${styles.btn_buy}`}></i></button>)}
-                        </div>}
+                        {favorites.data?.some(el => el.bookId === book.bookId) ? <i style={{ cursor: "pointer" }} onClick={() => handleRemoveFromFavorite({ userId: user?.userId, bookId: book.bookId })} className={`bi bi-heart-fill ${styles.remove_favorite}`}></i>
+                            : (<i style={{ cursor: "pointer" }} onClick={() => handleAddToFavorite({ userId: user?.userId, bookId: book.bookId })} className={`bi bi-heart ${styles.add_to_favorite}`}></i>)}
+
+                        {bask?.some(el => el.bookId === book.bookId) ? <button style={{ backgroundColor: 'red' }} onClick={() => handleRemoveFromBasket({ bookId: book.bookId, userId: user?.userId! })}>Убрать с <i className={`bi bi-bag ${styles.btn_buy}`}></i></button> :
+                            (<button onClick={() => handleBasketSubmit({ bookId: book.bookId, userId: user?.userId! })}>В корзину<i className={`bi bi-bag ${styles.btn_buy}`}></i></button>)}
+                    </div>}
                 </div>
             ))}
         </div>
