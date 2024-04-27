@@ -2,19 +2,28 @@ import styles from './Navbar.module.scss'
 import { Link } from 'react-router-dom'
 import Popup from 'reactjs-popup'
 import AuthPopup from '../AuthPopup'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { selectUser } from '../../features/auth/authSlice'
 import { ProfilePopup } from '../ProfilePopup'
 import { ChangeEvent } from 'react'
+import { selectSearchValue, setSearchBooks } from '../../features/mainSearch/mainSearchSlice'
 
 
 type TNavbar = {
     search: string | undefined,
-    setSearch: (e: string) => void
+    setSearch: (e: string) => void,
+    onClick: () => void
 }
 
-const Navbar = ({ search, setSearch }: TNavbar) => {
+const Navbar = ({ search, setSearch, onClick }: TNavbar) => {
     const user = useSelector(selectUser);
+    const dispatch = useDispatch();
+
+    const handleRemoveSearchValue = () => {
+        dispatch(setSearchBooks(null))
+        setSearch("");
+    }
+    const searchedValue = useSelector(selectSearchValue)
     return (
         <div className={styles.navbar}>
             <div className={styles.container}>
@@ -27,7 +36,8 @@ const Navbar = ({ search, setSearch }: TNavbar) => {
                 </div>
                 <div className={styles.search}>
                     <input type="text" placeholder='Искать книгу' onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} value={search} />
-                    <button>
+                    {searchedValue || search ? <button onClick={handleRemoveSearchValue} style={{ background: "transparent", color: "red" }}><i className="bi bi-x-lg"></i></button> : ""}
+                    <button onClick={onClick} type='button'>
                         Найти</button>
                 </div>
                 <div className={styles.navigate}>

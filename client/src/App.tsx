@@ -15,14 +15,26 @@ import { useState } from 'react';
 import Favorite from './pages/Favorite';
 import { Basket } from './pages/Basket';
 import { MyPurchases } from './pages/MyPurchases';
+import { useGetAllBooksQuery } from './app/services/book';
+import { setSearchBooks } from './features/mainSearch/mainSearchSlice';
+import { useDispatch } from 'react-redux';
 
 const App = () => {
   const [search, setSearch] = useState<string>("");
+
+  const bookList = useGetAllBooksQuery();
+  const dispatch = useDispatch();
+
+  const onClickSearchButton = () => {
+    if(search !== "") {
+      dispatch(setSearchBooks(bookList.data?.filter(el => el.bookName.toLowerCase().includes(search.toLowerCase()))))
+    }
+  }
+
   return (
     <>
-    <Navbar search={search} setSearch={setSearch}/>
+      <Navbar search={search} setSearch={setSearch} onClick={onClickSearchButton} />
       <div className="container">
-
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />

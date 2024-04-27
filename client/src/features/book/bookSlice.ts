@@ -1,6 +1,7 @@
 import { Book, BookType, Categories, User } from "@prisma/client";
 import { createSlice } from "@reduxjs/toolkit";
 import { bookApi } from "../../app/services/book";
+import { RootState } from "../../app/store";
 
 
 
@@ -43,3 +44,5 @@ export const bookSlice = createSlice({
 })
 
 export default bookSlice.reducer;
+
+export const selectBooks = (state:RootState) => state.book.book
