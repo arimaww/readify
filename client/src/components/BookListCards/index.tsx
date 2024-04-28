@@ -40,7 +40,7 @@ export const BookListCards = ({ searchData, onDeleteButtonClick, forSomeAuthor }
 
     let bookList = null;
 
-    if (user?.role === "AUTHOR") 
+    if (user?.role === "AUTHOR" && forSomeAuthor) 
         bookList = useGetBookListQuery({ id: user?.userId })
 
 
