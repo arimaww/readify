@@ -9,6 +9,7 @@ import { useState } from 'react'
 import { BasketResultData, useAddToUserBasketMutation, useGetUserBasketQuery, useRemoveBookFromUserBasketMutation } from '../../app/services/basket'
 import { useGetBookListQuery } from '../../app/services/book'
 import { useSnackbar } from 'notistack'
+import { LoadingPage } from '../LoadingPage'
 
 type TBookListCards = {
     searchData: Book[] | undefined,
@@ -111,6 +112,8 @@ export const BookListCards = ({ searchData, onDeleteButtonClick, forSomeAuthor }
             }
         }
     }
+
+    if(!searchData?.map) return <LoadingPage />
 
 
     return (
