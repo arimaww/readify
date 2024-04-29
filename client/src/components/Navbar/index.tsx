@@ -28,12 +28,12 @@ const Navbar = ({ search, setSearch, onClick }: TNavbar) => {
         <div className={styles.navbar}>
             <div className={styles.container}>
                 <Link to={'/'} className={styles.logo}>BookService</Link>
-                <div className={styles.categories}>
+                {/* <div className={styles.categories}>
                     <button className={styles.categories__button}>
                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.5 10H5.5C4.94772 10 4.5 10.4477 4.5 11V18C4.5 18.5523 4.94772 19 5.5 19H19.5C20.0523 19 20.5 18.5523 20.5 18V11C20.5 10.4477 20.0523 10 19.5 10Z" stroke="#E9EBF0" strokeWidth="1.5" strokeLinejoin="round"></path><path d="M6.5 7.5H18.5" stroke="#E9EBF0" strokeWidth="1.5" strokeLinejoin="round"></path><path d="M8.5 5H16.5" stroke="#E9EBF0" strokeWidth="1.5" strokeLinejoin="round"></path></svg>
                         <div>Каталог</div>
                     </button>
-                </div>
+                </div> */}
                 <div className={styles.search}>
                     <input type="text" placeholder='Искать книгу' onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)} value={search} />
                     {searchedValue || search ? <button onClick={handleRemoveSearchValue} style={{ background: "transparent", color: "red" }}><i className="bi bi-x-lg"></i></button> : ""}
