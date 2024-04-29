@@ -5,7 +5,7 @@ import AuthPopup from '../AuthPopup'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectUser } from '../../features/auth/authSlice'
 import { ProfilePopup } from '../ProfilePopup'
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { selectSearchValue, setSearchBooks } from '../../features/mainSearch/mainSearchSlice'
 
 
@@ -24,10 +24,11 @@ const Navbar = ({ search, setSearch, onClick }: TNavbar) => {
         setSearch("");
     }
     const searchedValue = useSelector(selectSearchValue)
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     return (
         <div className={styles.navbar}>
             <div className={styles.container}>
-                <Link to={'/'} className={styles.logo}>BookService</Link>
+                <Link to={'/'} className={styles.logo}>Readify</Link>
                 {/* <div className={styles.categories}>
                     <button className={styles.categories__button}>
                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.5 10H5.5C4.94772 10 4.5 10.4477 4.5 11V18C4.5 18.5523 4.94772 19 5.5 19H19.5C20.0523 19 20.5 18.5523 20.5 18V11C20.5 10.4477 20.0523 10 19.5 10Z" stroke="#E9EBF0" strokeWidth="1.5" strokeLinejoin="round"></path><path d="M6.5 7.5H18.5" stroke="#E9EBF0" strokeWidth="1.5" strokeLinejoin="round"></path><path d="M8.5 5H16.5" stroke="#E9EBF0" strokeWidth="1.5" strokeLinejoin="round"></path></svg>
@@ -40,7 +41,10 @@ const Navbar = ({ search, setSearch, onClick }: TNavbar) => {
                     <button onClick={onClick} type='button'>
                         Найти</button>
                 </div>
-                <div className={styles.navigate}>
+                <div className={styles.menu_btn} onClick={() => setIsOpen(prev => !prev)}>
+                    <span className={`${styles.bar} ${isOpen ? styles.bar_active : ""}`}></span>
+                </div>
+                <div className={styles.navigate} style={isOpen ? {display: "flex"} : {}}>
                     <li className={styles.navigate__item}><Link to="/favorite" className={styles.navigate__link}>
                         <svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.1748 2.2002C18.7214 3.74684 18.7807 6.23557 17.3093 7.85403L9.93699 15.9629L2.56562 7.854C1.09429 6.23554 1.15355 3.74679 2.70019 2.20015C4.42711 0.473229 7.27122 0.631031 8.79687 2.53809L9.9375 3.96335L11.0771 2.53793C12.6028 0.630869 15.4479 0.473284 17.1748 2.2002Z" stroke="#020305" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>
                         <div>Избранное</div></Link></li>
@@ -72,6 +76,7 @@ const Navbar = ({ search, setSearch, onClick }: TNavbar) => {
 
 
                 </div>
+                
             </div>
         </div>
     )
