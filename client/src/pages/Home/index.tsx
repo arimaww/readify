@@ -83,17 +83,13 @@ const Home = () => {
 
   return (
     <div className={styles.home}>
-      <div>
         <SortPanel
           selectedOption={selectedOption}
           setSelectedOption={setSelectedOption}
           setSortData={setSortData}
           sortData={sortData}
         />
-      </div>
-      <div>
         <BookListCards forSomeAuthor={false} searchData={sortedBookList ? sortedBookList : (searchedData !== null ? searchedData : bookList.data)} />
-      </div>
     </div>
   );
 };
