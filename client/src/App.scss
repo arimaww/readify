@@ -12,17 +12,19 @@ body {
 
 .container {
     margin: 0 auto;
-    max-width: 1280px;
 }
 
 @mixin breakpoint($point) {
     @if $point == small {
-        @media screen and (min-width: 576px) { @content; }
+        @media screen and (max-width: 600px) { @content; }
     }
     @if $point == medium {
-        @media screen and (max-width: 1096px) {@content;}
+        @media screen and (max-width: 780px) {@content;}
     }
     @if $point == large {
-        @media screen and (min-width: 1096px) {@content;}
+        @media screen and (min-width: 780px) {@content;}
+    }
+    @if $point == xLarge {
+        @media screen and (max-width: 1040px) {@content}
     }
 }
