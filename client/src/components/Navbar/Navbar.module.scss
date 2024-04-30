@@ -8,6 +8,7 @@
     box-shadow: 1px 2px 30px rgba(0, 0, 0, 0.254);
     width: 100%;
 
+
     .menu_btn {
         width: 40px;
         height: 60px;
@@ -73,10 +74,10 @@
     .container {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
-        place-items: center;
         height: 84px;
+        padding: 0 20px;
         width: 100%;
         max-width: 1280px;
         gap: 12px;
@@ -91,32 +92,62 @@
 
         .search {
             display: flex;
-            flex: 1;
-            justify-content: center;
+            justify-content: start;
             align-items: center;
             grid-column-start: span 2;
-            width: 100%;
-            input {
-                margin-left: 8px;
-                width: 85%;
-                height: 35px;
+            position: relative;
+            &__remove {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                right: 65px;
+                
+                background-color: #00000050;
+                color: rgb(255, 255, 255);
+                font-size: 13px;
+                
+                border: 0;
+                border-radius: 50%;
+                
+                height: 21px;
+                width: 21px;
+                
+                cursor: pointer;
+            }
+            textarea {
+                padding-top: 12px;
+                resize: none;
+                width: 100%;
+                height: 25px;
                 outline: none;
                 border-radius: 7px;
                 border: 1px solid #43009c;
                 text-indent: 11px;
                 font-size: 14px;
+                font-family: sans-serif;
                 font-weight: 600;
             }
-            
-            button {
+            textarea:not(:placeholder-shown) ~ &__remove {
+                display: block;
+            }
+            textarea:placeholder-shown ~ button[type="reset"] {
+                display: none;
+            }
+
+            &__button {
+                i {
+                    font-size: 12px;
+                }
                 position: relative;
-                left: -8px;
+                left: -20px;
                 background-color: #43009c;
                 border: 0;
+                width: 40px;
+                height: 41px;
                 color: #fff;
                 border-radius: 7px;
                 outline: none;
-                height: 40px;
                 cursor: pointer;
                 font-weight: 600;
 
@@ -157,9 +188,13 @@
 
         &__item {
             list-style: none;
+
+            i {
+                font-size: 21px;
+            }
         }
 
-        button {
+        &__button {
             background-color: transparent;
             border: 0;
             cursor: pointer;
@@ -196,46 +231,89 @@
 
 @include breakpoint(medium) {
     .navbar {
-        align-items: center;
-        height: 60px;
+        height: 130px;
+
 
         .menu_btn {
+            z-index: 1000;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 0 auto;
+            grid-area: b;
         }
 
         .navigate {
-            display: none;
-            justify-content: center;
+            z-index: 999;
+            flex-direction: column;
+            padding-top: 60px;
             position: absolute;
-            background-color: #3ca1ff;
-            top: 60px;
+            background-color: #c1ffe7;
+            top: 0;
             left: 0;
             width: 100%;
-        }
-        .container {
-         
-            .search {
-                justify-content: center;
-                input {
-                    height: 20px;
-                    font-size: 9px;
+            height: 100%;
+            transition: all .2s ease-in-out;
+
+            &__item {
+                width: 100%;
+            }
+
+            &__button {
+                display: flex;
+                align-items: center;
+                font-size: 16px;
+                width: 100%;
+
+                &:hover,
+                &:active,
+                &:focus {
+                    background-color: #0000002b;
+                    border-radius: 12px;
                 }
-                button {
-                    height: 25px;
+
+                div {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+
+            }
+
+            &__link {
+                flex-direction: row;
+                align-items: center;
+                justify-content: start;
+
+                &:hover,
+                &:active,
+                &:focus {
+                    background-color: #0000002b;
+                    border-radius: 12px;
                 }
             }
         }
-    }
-}
 
-@include breakpoint(large) {
-    .navbar {
+        .container {
+            grid-template-areas:
+                "a a a a b b b b"
+                "c c c c c c c c";
 
-        .navigate {
-            display: flex;
+            .logo {
+                grid-area: a;
+            }
+            .search {
+                grid-area: c;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                
+                textarea {
+                    position: relative;
+                    font-size: 12px;
+                }
+            }
         }
     }
 }
