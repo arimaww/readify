@@ -1,12 +1,11 @@
+@import '../../App.scss';
+
 .books {
-    
     &__cards {
         display: grid;
-        grid-template-columns: repeat(3, 20%);
-        justify-content: center;
-        user-select: none;
-        gap: 130px;
-        
+        grid-template-columns: repeat(3, 1fr);
+        justify-content: space-around;
+        gap: 30px;
         padding: 0;
 
         h3,
@@ -32,7 +31,8 @@
         background-color: #ffffff;
         box-shadow: 0 0 20px #0000002b;
         padding: 20px;
-        width: 210px;
+        width: 180px;
+        height: 310px;
         gap: 20px;
         border-radius: 7px;
 
@@ -51,6 +51,7 @@
 
         .add_to_favorite {
             transition: color .2s ease-in-out;
+
             &:hover {
                 color: rgb(118, 118, 118);
             }
@@ -125,4 +126,28 @@
     }
 
 
+}
+
+
+@include breakpoint(medium) {
+    .books {
+        &__cards {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+
+@include breakpoint(small) {
+    .books {
+        &__cards {
+            justify-content: center;
+            place-items: center;
+            grid-template-columns: repeat(1, 1fr);
+            width: 100%;
+            margin: 50px 0 50px 0;
+        }
+        &__card {
+            width: 50%;
+        }
+    }
 }
