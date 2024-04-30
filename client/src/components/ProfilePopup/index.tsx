@@ -8,7 +8,7 @@ import { UserData } from '../../app/services/auth';
 import { useCallback } from 'react';
 
 
-export const ProfilePopup = () => {
+export const ProfilePopup = ({ setIsOpen }: { setIsOpen: React.Dispatch<React.SetStateAction<boolean>> }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar();
@@ -20,6 +20,7 @@ export const ProfilePopup = () => {
         navigate('/login')
         localStorage.removeItem("token")
         enqueueSnackbar("Вы успешно вышли с аккаунта", { variant: "success" })
+        setIsOpen(prev => !prev)
     }
 
     const user = useSelector(selectUser)
@@ -32,19 +33,22 @@ export const ProfilePopup = () => {
             console.log(err);
         }
     }, [user?.role])
+    const handleClick = () => (
+        setIsOpen(false)
+    )
     return (
         <div className={styles.popup}>
-            <Link to={'/mycab'}>
+            <Link to={'/mycab'} onClick={handleClick}>
                 Мой кабинет
             </Link>
-            <Link to={'/support'}>
+            <Link to={'/support'} onClick={handleClick}>
                 Чат с поддержкой
             </Link>
-            <div>Баланс: {Number(user?.wallet)} ₽</div>
+            <div className={styles.popup__wallet}>Баланс: {Number(user?.wallet)} ₽</div>
             {!resultChangeRole.isSuccess ? user?.role === "USER" ? (<button onClick={onBeAuthorClick}>
                 {resultChangeRole.isLoading ? "Загрузка..." : "Стать автором"}
             </button>) : "" : ""}
-            <button onClick={onLogoutClick}>Выйти</button>
+            <button className={styles.popup__button} onClick={onLogoutClick}>Выйти</button>
         </div>
     )
 }

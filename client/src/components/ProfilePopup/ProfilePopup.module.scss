@@ -1,10 +1,13 @@
+@import '../../App.scss';
+
 .popup {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 5px;
+    overflow-x: hidden;
 
-    button {
+    &__button {
         width: 80%;
         height: 24px;
         margin: 0 auto;
@@ -41,6 +44,36 @@
 
         &:hover {
             background-color: #00000038;
+        }
+    }
+}
+
+@include breakpoint(small) {
+    .popup {
+        justify-content: start;
+        gap: 15px;
+        align-items: start;
+        a {
+            background: transparent;
+            width: 100%;
+            align-items: center;
+            padding-left: 25px;
+            justify-content: start;
+        }
+
+        &__wallet {
+            padding-left: 25px;
+        }
+
+        &__button {
+            width: 100%;
+            background-color: rgb(255, 42, 84);
+            font-size: 16px;
+            color: #fff;
+
+            &:hover {
+                background-color: #00000038;
+            }
         }
     }
 }
