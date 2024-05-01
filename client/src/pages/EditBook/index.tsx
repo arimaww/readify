@@ -10,6 +10,7 @@ import { ISelectOptions } from '../AddBook';
 import { isErrorWithMessage } from '../../utils/is-error-with-message';
 import { useParams } from 'react-router-dom';
 import { Book } from '../../features/book/book';
+import { PrevButton } from '../../components/PrevButton';
 
 const EditBook = () => {
     const { register, handleSubmit, control } = useForm<IBookInputs>();
@@ -20,7 +21,7 @@ const EditBook = () => {
     const { bookId } = useParams();
 
 
-    const bookData = useGetBookByIdQuery({bookId: parseInt(bookId as string)});
+    const bookData = useGetBookByIdQuery({ bookId: parseInt(bookId as string) });
     const [updateBook, resultUpdateBook] = useUpdateBookMutation();
 
     const types = useGetAllTypesQuery();
@@ -43,7 +44,6 @@ const EditBook = () => {
     }
 
     const book = async (data: IBookInputs) => {
-        console.log(data)
         try {
             const languages = ["RUSSIAN", "ENGLISH", "DUTCH", "AZERBAIJANIAN"]
             const formData = new FormData;
@@ -57,11 +57,11 @@ const EditBook = () => {
             formData.append("language", languages[parseInt(data.language)] ?? bookData.data?.language)
             formData.append("file1", file!)
             formData.append("file1", image!)
-            
+
             await updateBook(formData as any).unwrap();
 
 
-            enqueueSnackbar("Ифнормация книги успешно обновлена", {variant: "success"});
+            enqueueSnackbar("Ифнормация книги успешно обновлена", { variant: "success" });
         }
         catch (err) {
             if (isErrorWithMessage(err)) {
@@ -77,26 +77,29 @@ const EditBook = () => {
 
     return (
         <Book>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-                <BookForm
-                    loading={true}
-                    book={bookData.data}
-                    title="Страница обновления книги"
-                    setFile={setFile}
-                    categoryOptions={categoryOptions}
-                    control={control}
-                    error={error}
-                    handleSubmit={handleSubmit}
-                    onSubmit={onSubmit}
-                    register={register}
-                    resultCreateBook={resultUpdateBook}
-                    setImage={setImage}
-                    typeOptions={typeOptions}
-                    user={user}
-                    bookCategories={categories.data}
-                    bookTypes={types.data}
-                    buttonTitle='Сохранить'
-                />
+            <div style={{ display: "grid", justifyContent: "center" }}>
+                <PrevButton user={user} />
+                <>
+                    <BookForm
+                        loading={true}
+                        book={bookData.data}
+                        title="Страница обновления книги"
+                        setFile={setFile}
+                        categoryOptions={categoryOptions}
+                        control={control}
+                        error={error}
+                        handleSubmit={handleSubmit}
+                        onSubmit={onSubmit}
+                        register={register}
+                        resultCreateBook={resultUpdateBook}
+                        setImage={setImage}
+                        typeOptions={typeOptions}
+                        user={user}
+                        bookCategories={categories.data}
+                        bookTypes={types.data}
+                        buttonTitle='Сохранить'
+                    />
+                </>
             </div>
         </Book>
 

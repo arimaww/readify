@@ -10,6 +10,7 @@ import AddBookForm from '../../components/BookForm'
 import { useSnackbar } from 'notistack'
 import { useNavigate } from 'react-router-dom'
 import { LoadingPage } from '../../components/LoadingPage'
+import { PrevButton } from '../../components/PrevButton'
 
 export interface ISelectOptions {
     value: number,
@@ -79,28 +80,32 @@ const AddBook = () => {
     }
 
 
-    if(!categoryOptions || !control || !user || !typeOptions)
+    if (!categoryOptions || !control || !user || !typeOptions)
         return <LoadingPage />
 
 
     return (
         <div className={styles.addbook}>
-            <AddBookForm
-                loading={false}
-                title='Страница добавления книги'
-                categoryOptions={categoryOptions}
-                control={control}
-                error={error}
-                handleSubmit={handleSubmit}
-                onSubmit={onSubmit}
-                register={register}
-                resultCreateBook={resultCreateBook}
-                setFile={setFile}
-                setImage={setImage}
-                typeOptions={typeOptions}
-                user={user}
-                buttonTitle='Добавить'
-            />
+            <PrevButton user={user} />
+            <div>
+                <AddBookForm
+                    loading={false}
+                    title='Страница добавления книги'
+                    categoryOptions={categoryOptions}
+                    control={control}
+                    error={error}
+                    handleSubmit={handleSubmit}
+                    onSubmit={onSubmit}
+                    register={register}
+                    resultCreateBook={resultCreateBook}
+                    setFile={setFile}
+                    setImage={setImage}
+                    typeOptions={typeOptions}
+                    user={user}
+                    buttonTitle='Добавить'
+                />
+            </div>
+
         </div>
     )
 }
