@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectUser } from '../../features/auth/authSlice'
 import { ProfilePopup } from '../ProfilePopup'
 import { ChangeEvent, useState } from 'react'
-import { selectSearchValue, setSearchBooks } from '../../features/mainSearch/mainSearchSlice'
+import { setSearchBooks } from '../../features/mainSearch/mainSearchSlice'
 
 
 type TNavbar = {
@@ -23,11 +23,9 @@ const Navbar = ({ search, setSearch, onClick }: TNavbar) => {
         dispatch(setSearchBooks(null))
         setSearch("");
     }
-    const searchedValue = useSelector(selectSearchValue)
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [profileClick, setProfileClick] = useState<boolean>(false);
 
-    console.log(searchedValue)
     return (
         <div className={styles.navbar}>
             <div className={styles.container}>
