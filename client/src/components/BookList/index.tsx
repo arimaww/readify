@@ -29,9 +29,6 @@ const BookList = () => {
     }
   }
 
-
-
-
   return (
     <div className={styles.books}>
       <div className={styles.books__header}>
