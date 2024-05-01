@@ -6,14 +6,16 @@ import { RootState } from "../../app/store";
 
 
 type InitialState = {
-    books: Book | Book[] | null
+    book: Book | null
+    bookList: Book[] | null
     bookType?: BookType[] | null
     bookCategories?: Categories[] | null
     user?: User | null
 }
 
 const initialState:InitialState = {
-    books: null,
+    book: null,
+    bookList: null
 }
 
 export const bookSlice = createSlice({
@@ -22,27 +24,27 @@ export const bookSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addMatcher(bookApi.endpoints.createBook.matchFulfilled, (state, action) => {
-            state.books = action.payload;
+            state.book = action.payload;
         }).addMatcher(bookApi.endpoints.deleteBook.matchFulfilled, (state, action) => {
-            state.books = action.payload;
+            state.book = action.payload;
         }).addMatcher(bookApi.endpoints.getBookList.matchFulfilled, (state, action) => {
-            state.books = action.payload;
+            state.bookList = action.payload;
         }).addMatcher(bookApi.endpoints.updateBook.matchFulfilled, (state, action) => {
-            state.books = action.payload;
+            state.book = action.payload;
         }).addMatcher(bookApi.endpoints.getAllTypes.matchFulfilled, (state, action) => {
             state.bookType = action.payload;
         }).addMatcher(bookApi.endpoints.getAllCategories.matchFulfilled, (state, action) => {
             state.bookCategories = action.payload;
         }).addMatcher(bookApi.endpoints.getBookById.matchFulfilled, (state, action) => {
-            state.books = action.payload;
+            state.book = action.payload;
         }).addMatcher(bookApi.endpoints.getAuthorById.matchFulfilled, (state, action) => {
             state.user = action.payload;
         }).addMatcher(bookApi.endpoints.getAllBooks.matchFulfilled, (state, action) => {
-            state.books = action.payload;
+            state.bookList = action.payload;
         })
     }
 })
 
 export default bookSlice.reducer;
 
-export const selectBooks = (state:RootState) => state.book.books
+export const selectBooks = (state:RootState) => state.book.bookList
