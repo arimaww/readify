@@ -25,7 +25,6 @@ const Navbar = ({ search, setSearch, onClick }: TNavbar) => {
     }
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [profileClick, setProfileClick] = useState<boolean>(false);
-
     return (
         <div className={styles.navbar}>
             <div className={styles.container}>
@@ -49,10 +48,10 @@ const Navbar = ({ search, setSearch, onClick }: TNavbar) => {
                     <span className={`${styles.bar} ${isOpen ? styles.bar_active : ""}`}></span>
                 </div>
                 <div className={styles.navigate} style={isOpen ? {} : { left: "-1000px" }}>
-                    <li className={styles.navigate__item}><Link to="/favorite" className={styles.navigate__link} onClick={() => setIsOpen(prev => !prev)}>
+                    <li className={styles.navigate__item}><Link to="/favorite" className={styles.navigate__link} onClick={isOpen ? () => setIsOpen(prev => !prev) : () => {}}>
                         <i className="bi bi-heart"></i>
                         <div>Избранное</div></Link></li>
-                    <li className={styles.navigate__item}><Link to="/basket" className={styles.navigate__link} onClick={() => setIsOpen(prev => !prev)}>
+                    <li className={styles.navigate__item}><Link to="/basket" className={styles.navigate__link} onClick={isOpen ? () => setIsOpen(prev => !prev) : () => {}}>
                         <i className="bi bi-cart3"></i>
                         <div>Корзина</div></Link></li>
                     {user ? isOpen ? <li className={styles.navigate__item}>
