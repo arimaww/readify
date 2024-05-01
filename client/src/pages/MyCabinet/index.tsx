@@ -64,9 +64,17 @@ const MyCabinet = () => {
     }
   }, [user, navigate])
 
+
+  const [isOpen, setIsMenuOpen] = useState<boolean>(false);
   return (
     <div className={styles.cabinet}>
-      <Sidebar />
+      <div className={styles.cabinet__menu}>
+        <button className={styles.cabinet__openMenu} onClick={() => setIsMenuOpen(prev => !prev)}>{isOpen ? "Закрыть" : "Открыть меню"}</button>
+        <div className={styles.cabinet__sidebar} style={isOpen ? { left: "0" } : {}}>
+          <Sidebar setIsMenuOpen={setIsMenuOpen} />
+        </div>
+      </div>
+
       <div className={styles.mycab}>
 
         <EditForm avatar={avatar}
