@@ -1,3 +1,5 @@
+@import '../../App.scss';
+
 .basket {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -12,5 +14,22 @@
 
     &__basketBookList {
         grid-column-start: 2 span;
+    }
+}
+
+@include breakpoint(medium) {
+    .basket {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        padding: 20px;
+        margin: 0;
+
+        h2 {
+            grid-column-start: 3 span;
+        }
+
+        &__basketBookList {
+            grid-column-start: 3 span;
+        }
     }
 }
