@@ -126,8 +126,8 @@ export const BookListCards = ({ searchData, onDeleteButtonClick, forSomeAuthor }
                     </Link>
                     <h3>{book?.bookName}</h3>
                     <p>Стоимость: {book?.cost} ₽</p>
-                    {forSomeAuthor ? (<div>
-                        <button type="button" onClick={() => onDeleteButtonClick!(book.bookId)}>Delete</button>
+                    {forSomeAuthor ? (<div className={styles.authorsBook}>
+                        <button type="button" onClick={() => onDeleteButtonClick!(book.bookId)}>Удалить</button>
                         <Link to={`/edit/${book.bookId}`}>Изменить</Link>
                     </div>) : <div>
                         {favorites.data?.some(el => el.bookId === book.bookId) ? <i style={{ cursor: "pointer" }} onClick={() => handleRemoveFromFavorite({ userId: user?.userId, bookId: book.bookId })} className={`bi bi-heart-fill ${styles.remove_favorite}`}></i>

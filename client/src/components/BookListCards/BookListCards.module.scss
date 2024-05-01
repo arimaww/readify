@@ -2,6 +2,18 @@
 
 .books {
     &__cards {
+        .authorsBook {
+            display: flex;
+            gap: 10px;
+            button {
+                background-color: red;
+            }
+            a {
+                height: 40px;
+                width: 120px;
+            }
+        }
+        margin-top: 30px;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         justify-content: space-around;
@@ -15,8 +27,6 @@
             margin: 0;
             padding: 0;
         }
-
-
 
         a {
             text-decoration: none;
