@@ -19,7 +19,11 @@ const customStyles = {
   },
 };
 
-export const Sidebar = () => {
+type TSiderar = {
+  setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export const Sidebar = ({setIsMenuOpen}:TSiderar) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [deleteUser, resultDeleteUser] = useDeleteUserMutation();
   const [error, setError] = useState<string>("");
@@ -62,7 +66,7 @@ export const Sidebar = () => {
           {admin?.role === "AUTHOR" || user?.role === "AUTHOR" ? <Link to={`/author_cabinet/${user?.userId}`}>Кабинет автора</Link> : ""}
           <Link to={'/'}>Частые вопросы</Link>
           <Link to={'/'}>Чат с поддержкой</Link>
-          <button onClick={() => setIsOpen(true)}>
+          <button onClick={() => {setIsOpen(true); setIsMenuOpen(false)}}>
             {resultDeleteUser.isLoading ? "Ожидание..." : "Удалить профиль"}
           </button>
           <Modal isOpen={isOpen} style={customStyles} ariaHideApp={false}>
@@ -72,6 +76,7 @@ export const Sidebar = () => {
               <button onClick={() => setIsOpen(false)}>Отменить</button>
             </div>
           </Modal>
+          
         </div>
     </div>
   )
