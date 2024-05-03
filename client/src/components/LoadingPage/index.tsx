@@ -1,11 +1,11 @@
 import styles from './LoadingPage.module.scss'
-import { Circles } from 'react-loader-spinner'
+import { HashLoader } from "react-spinners";
 
 export const LoadingPage = () => {
     return (
         <div className={styles.loadingPage}>
             <div>
-                <Circles height={140} width={140} />
+                <HashLoader color="#36d7b7" />
             </div>
         </div>
     )
