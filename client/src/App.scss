@@ -26,6 +26,6 @@ body {
         @media screen and (min-width: 780px) {@content;}
     }
     @if $point == xLarge {
-        @media screen and (max-width: 1040px) {@content}
+        @media screen and (max-width: 1039px) {@content}
     }
 }
