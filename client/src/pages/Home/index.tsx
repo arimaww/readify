@@ -17,6 +17,11 @@ type TResultArray = {
 const Home = () => {
   const bookList = useGetAllBooksQuery();
   const [selectedOption, setSelectedOption] = useState<TOptions>();
+  
+  const [isFiltersOpen, setIsFilterOpen] = useState<boolean>(false);
+  const [width, setWidth] = useState(window.innerWidth);
+  window.addEventListener('resize', () => setWidth(window.innerWidth))
+
   let searchedData = useSelector(selectSearchValue);
 
   const ratings = useGetAllRatingsQuery();
@@ -83,13 +88,25 @@ const Home = () => {
 
   return (
     <div className={styles.home}>
-        <SortPanel
-          selectedOption={selectedOption}
-          setSelectedOption={setSelectedOption}
-          setSortData={setSortData}
-          sortData={sortData}
-        />
-        <BookListCards forSomeAuthor={false} searchData={sortedBookList ? sortedBookList : (searchedData !== null ? searchedData : bookList.data)} />
+      {width < 1040 ? <button className={styles.home__button}
+        onClick={() => setIsFilterOpen(prev => !prev)}>
+        Сортировка <span style={{ position: 'relative' }}><i className="bi bi-arrow-down" style={isFiltersOpen ? { opacity: 0 } : { position: 'absolute', opacity: 1, transition: "all .4s linear" }}></i>
+          <i className="bi bi-arrow-up" style={isFiltersOpen ? { position: 'absolute', left: 0, opacity: 1, transition: "all .4s linear" } : { opacity: 0 }}></i></span>
+      </button> : ""}
+      {width < 1040 ? isFiltersOpen ? <SortPanel
+        selectedOption={selectedOption}
+        setSelectedOption={setSelectedOption}
+        setSortData={setSortData}
+        sortData={sortData}
+      /> : "" : <SortPanel
+        selectedOption={selectedOption}
+        setSelectedOption={setSelectedOption}
+        setSortData={setSortData}
+        sortData={sortData}
+      />}
+      
+
+      <BookListCards forSomeAuthor={false} searchData={sortedBookList ? sortedBookList : (searchedData !== null ? searchedData : bookList.data)} />
     </div>
   );
 };
