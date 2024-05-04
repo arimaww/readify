@@ -31,19 +31,23 @@ const AddBook = () => {
     const { enqueueSnackbar } = useSnackbar();
     const navigate = useNavigate();
 
+    
     const typeOptions: ISelectOptions[] = [];
+    const categoryOptions: ISelectOptions[] = [];
+    
+    if (!categoryOptions || !control || !user || !typeOptions)
+        return <LoadingPage />
     for (let i = 0; i < (types.data?.length ? types.data?.length : 1); i++) {
         if (typeof types.data !== "undefined") {
-            typeOptions.push({ value: types.data[i].typeId, label: types.data[i].typeName })
+            typeOptions.push({ value: types.data[i]?.typeId, label: types.data[i]?.typeName })
         }
     }
-    const categoryOptions: ISelectOptions[] = [];
     for (let i = 0; i < (categories.data?.length ? categories.data?.length : 1); i++) {
         if (typeof categories.data !== "undefined") {
-            categoryOptions.push({ value: categories.data[i].categoryId, label: categories.data[i].categoryName })
+            categoryOptions.push({ value: categories.data[i]?.categoryId, label: categories.data[i]?.categoryName })
         }
     }
-
+    
 
     const createBook = async (data: IBookInputs) => {
         try {
@@ -80,8 +84,7 @@ const AddBook = () => {
     }
 
 
-    if (!categoryOptions || !control || !user || !typeOptions)
-        return <LoadingPage />
+    
 
 
     return (
