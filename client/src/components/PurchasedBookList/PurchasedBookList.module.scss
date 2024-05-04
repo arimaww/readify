@@ -1,20 +1,34 @@
+@import '../../App.scss';
+
 .purchasedBookList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    place-items: center;
     width: 100%;
     margin-top: 40px;
+    gap: 20px;
 
     &__item {
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
         align-items: center;
         padding: 24px;
-        width: 100%;
+        width: 200px;
+        height: 300px;
         background-color: #ffffff;
         border-radius: 12px;
         box-shadow: 0 0 12px #0000001f;
+
+        img {
+            width: 180px;
+            height: 180px;
+        }
     }
 
     &__about {
         display: flex;
+        flex-direction: column;
         align-items: center;
         gap: 12px;
     }
@@ -38,5 +52,17 @@
                 box-shadow: 0 0 12px #005eff77;
             }
         }
+    }
+}
+
+@include breakpoint(medium) {
+    .purchasedBookList {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@include breakpoint(small) {
+    .purchasedBookList {
+        grid-template-columns: repeat(1, 1fr);
     }
 }
