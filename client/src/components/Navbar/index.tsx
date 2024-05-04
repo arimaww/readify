@@ -47,7 +47,7 @@ const Navbar = ({ search, setSearch, onClick }: TNavbar) => {
                     <span className={`${styles.bar} ${isOpen ? styles.bar_active : ""}`}></span>
                 </div>
                 <div className={styles.navigate} style={isOpen ? {} : { left: "-1000px" }}>
-                    {user ? <div style={{display: 'flex'}}><li className={styles.navigate__item}><Link to="/favorite" className={styles.navigate__link} onClick={isOpen ? () => setIsOpen(prev => !prev) : () => { }}>
+                    {user ? <div className={styles.navigate__basketAndFavorite}><li className={styles.navigate__item}><Link to="/favorite" className={styles.navigate__link} onClick={isOpen ? () => setIsOpen(prev => !prev) : () => { }}>
                         <i className="bi bi-heart"></i>
                         <div>Избранное</div></Link>
                     </li>
