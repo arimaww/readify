@@ -20,7 +20,7 @@ export const ProfilePopup = ({ setIsOpen }: { setIsOpen: React.Dispatch<React.Se
         navigate('/login')
         localStorage.removeItem("token")
         enqueueSnackbar("Вы успешно вышли с аккаунта", { variant: "success" })
-        setIsOpen(prev => !prev)
+        setIsOpen(false)
     }
 
     const user = useSelector(selectUser)
