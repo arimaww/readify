@@ -40,9 +40,8 @@ export const BookListCards = ({ searchData, onDeleteButtonClick, forSomeAuthor }
 
     let bookList = null;
 
-    if (user?.role === "AUTHOR" && forSomeAuthor) 
+    if (user?.role === "AUTHOR")
         bookList = useGetBookListQuery({ id: user?.userId })
-
 
 
     const handleBasketSubmit = async (resultData: BasketResultData) => {
