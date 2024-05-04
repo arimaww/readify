@@ -38,14 +38,14 @@ export const ProfilePopup = ({ setIsOpen }: { setIsOpen: React.Dispatch<React.Se
     )
     return (
         <div className={styles.popup}>
-            <Link to={'/mycab'} onClick={handleClick}>
+            <Link to={'/mycab'} onClick={handleClick} className={styles.popup__links}>
                 Мой кабинет
             </Link>
-            <Link to={'/support'} onClick={handleClick}>
+            <Link to={'/support'} onClick={handleClick} className={styles.popup__links}>
                 Чат с поддержкой
             </Link>
             <div className={styles.popup__wallet}>Баланс: {Number(user?.wallet)} ₽</div>
-            {!resultChangeRole.isSuccess ? user?.role === "USER" ? (<button onClick={onBeAuthorClick}>
+            {!resultChangeRole.isSuccess ? user?.role === "USER" ? (<button className={styles.popup__links} onClick={onBeAuthorClick}>
                 {resultChangeRole.isLoading ? "Загрузка..." : "Стать автором"}
             </button>) : "" : ""}
             <button className={styles.popup__button} onClick={onLogoutClick}>Выйти</button>
