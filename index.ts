@@ -11,6 +11,7 @@ import walletRoutes from './Routes/walletRoutes'
 import purchaseRoutes from './Routes/purchaseRoutes'
 import path from 'path';
 import fs from 'fs'
+import { insertBasicRows } from './InsertBasicRows';
 
 const app = express();
 const PORT = process.env.PORT!;
@@ -25,6 +26,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+insertBasicRows();
 
 app.use('/api/user/', userRoutes)
 app.use('/api/book/', bookRoutes)
