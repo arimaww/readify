@@ -1,7 +1,6 @@
 import styles from './Navbar.module.scss'
 import { Link } from 'react-router-dom'
 import Popup from 'reactjs-popup'
-import AuthPopup from '../AuthPopup'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectUser } from '../../features/auth/authSlice'
 import { ProfilePopup } from '../ProfilePopup'
@@ -48,12 +47,18 @@ const Navbar = ({ search, setSearch, onClick }: TNavbar) => {
                     <span className={`${styles.bar} ${isOpen ? styles.bar_active : ""}`}></span>
                 </div>
                 <div className={styles.navigate} style={isOpen ? {} : { left: "-1000px" }}>
-                    <li className={styles.navigate__item}><Link to="/favorite" className={styles.navigate__link} onClick={isOpen ? () => setIsOpen(prev => !prev) : () => {}}>
+                    {user ? <div style={{display: 'flex'}}><li className={styles.navigate__item}><Link to="/favorite" className={styles.navigate__link} onClick={isOpen ? () => setIsOpen(prev => !prev) : () => { }}>
                         <i className="bi bi-heart"></i>
-                        <div>Избранное</div></Link></li>
-                    <li className={styles.navigate__item}><Link to="/basket" className={styles.navigate__link} onClick={isOpen ? () => setIsOpen(prev => !prev) : () => {}}>
+                        <div>Избранное</div></Link>
+                    </li>
+                    <li className={styles.navigate__item}><Link to="/basket" className={styles.navigate__link} onClick={isOpen ? () => setIsOpen(prev => !prev) : () => { }}>
                         <i className="bi bi-cart3"></i>
-                        <div>Корзина</div></Link></li>
+                        <div>Корзина</div></Link>
+                    </li></div> : <div className={styles.containers}>
+                        <div onClick={() => setIsOpen(false)}><Link className={`${styles.click_btn} ${styles.btn_style505}`} to='/login'>Войти</Link></div>
+                        <div onClick={() => setIsOpen(false)}><Link className={`${styles.click_btn} ${styles.btn_style505}`} to='/register'>Создать акк</Link></div>
+                    </div>}
+                    
                     {user ? isOpen ? <li className={styles.navigate__item}>
                         <button onClick={() => setProfileClick(prev => !prev)} className={styles.navigate__button}>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="11" r="3.25" stroke="#020305" strokeWidth="1.5"></circle><path d="M6.5 19.318C7.84208 18.0095 9.50575 17 12 17C14.4943 17 16.1579 18.0095 17.5 19.318" stroke="#020305" strokeWidth="1.5"></path><rect x="3" y="3" width="18" height="18" rx="9" stroke="#020305" strokeWidth="1.5"></rect></svg>
@@ -73,8 +78,8 @@ const Navbar = ({ search, setSearch, onClick }: TNavbar) => {
                     </Popup></li> : ""
 
                     }
-
-                    {user ? "" : <li className={styles.navigate__item}>
+                    
+                    {/* {user ? "" : <li className={styles.navigate__item}>
                         <Popup trigger={
                             <button onClick={() => setIsOpen(prev => !prev)} className={styles.navigate__button}>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="11" r="3.25" stroke="#020305" strokeWidth="1.5"></circle><path d="M6.5 19.318C7.84208 18.0095 9.50575 17 12 17C14.4943 17 16.1579 18.0095 17.5 19.318" stroke="#020305" strokeWidth="1.5"></path><rect x="3" y="3" width="18" height="18" rx="9" stroke="#020305" strokeWidth="1.5"></rect></svg>
@@ -84,7 +89,7 @@ const Navbar = ({ search, setSearch, onClick }: TNavbar) => {
                         } position="bottom center">
                             <AuthPopup />
                         </Popup>
-                    </li>}
+                    </li>} */}
 
 
                 </div>
