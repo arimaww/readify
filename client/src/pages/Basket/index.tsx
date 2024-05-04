@@ -31,7 +31,7 @@ export const Basket = () => {
       data.map(async el => await purchaseBook(el).unwrap())
       enqueueSnackbar("Покупка успешно совершена", { variant: "success" })
 
-      navigate('/mypurchases');
+      navigate('/success-purchase');
     }
     catch (err) {
       if (isErrorWithMessage(err)) {
