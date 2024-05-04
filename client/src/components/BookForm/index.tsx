@@ -95,7 +95,7 @@ const BookForm = ({ loading,
 
             <div className={styles.form__item}>
                 <label htmlFor="description">Описание</label>
-                <textarea id='about' cols={20} rows={10} {...register("description")} defaultValue={book?.description} />
+                <textarea id='description' cols={20} rows={10} {...register("description")} defaultValue={book?.description} />
             </div>
 
             <div className={styles.form__item}>
@@ -111,9 +111,9 @@ const BookForm = ({ loading,
                 <Controller name='language' control={control} render={({ field: { onChange } }) => (
                     <Select options={languages} id='language' tabSelectsValue defaultValue={languages.find(el => {
                         return (
-                           el.label.toUpperCase() === book?.language
-                       )
-                    
+                            el.label.toUpperCase() === book?.language
+                        )
+
                     })} className={styles.form__selectBlinking}
                         onChange={(val) => onChange(val?.value)} />
                 )} />
@@ -155,7 +155,7 @@ const BookForm = ({ loading,
                 {resultCreateBook.isLoading ? "Загрузка..." : `${buttonTitle}`}
             </button>
 
-            {error ? <p style={{width: "400px", display: "flex", justifyContent: "center"}}>Ошибка: {error}</p> : <p></p>}
+            {error ? <p style={{ width: "400px", display: "flex", justifyContent: "center" }}>Ошибка: {error}</p> : <p></p>}
         </form>
     )
 }
