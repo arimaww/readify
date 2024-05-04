@@ -52,9 +52,10 @@ CREATE TABLE "User" (
     "password" TEXT NOT NULL,
     "profilePhoto" TEXT,
     "dateOfBirth" TIMESTAMP(3) NOT NULL,
+    "wallet" DECIMAL(65,30) NOT NULL DEFAULT 0.00,
     "role" "Role" NOT NULL DEFAULT 'USER',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("userId")
 );
@@ -104,6 +105,28 @@ CREATE TABLE "Sale" (
     CONSTRAINT "Sale_pkey" PRIMARY KEY ("saleId")
 );
 
+-- CreateTable
+CREATE TABLE "Rating" (
+    "ratingId" SERIAL NOT NULL,
+    "value" DECIMAL(65,30) NOT NULL,
+    "bookId" INTEGER NOT NULL,
+    "userId" INTEGER NOT NULL,
+
+    CONSTRAINT "Rating_pkey" PRIMARY KEY ("ratingId")
+);
+
+-- CreateTable
+CREATE TABLE "Comments" (
+    "commentId" SERIAL NOT NULL,
+    "text" TEXT NOT NULL,
+    "bookId" INTEGER NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Comments_pkey" PRIMARY KEY ("commentId")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "BookType_typeId_key" ON "BookType"("typeId");
 
@@ -136,6 +159,9 @@ CREATE UNIQUE INDEX "Author_authorId_key" ON "Author"("authorId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Sale_saleId_key" ON "Sale"("saleId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Rating_ratingId_key" ON "Rating"("ratingId");
 
 -- AddForeignKey
 ALTER TABLE "Book" ADD CONSTRAINT "Book_typeId_fkey" FOREIGN KEY ("typeId") REFERENCES "BookType"("typeId") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -172,3 +198,15 @@ ALTER TABLE "Sale" ADD CONSTRAINT "Sale_authorId_fkey" FOREIGN KEY ("authorId") 
 
 -- AddForeignKey
 ALTER TABLE "Sale" ADD CONSTRAINT "Sale_bookId_fkey" FOREIGN KEY ("bookId") REFERENCES "Book"("bookId") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Rating" ADD CONSTRAINT "Rating_bookId_fkey" FOREIGN KEY ("bookId") REFERENCES "Book"("bookId") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Rating" ADD CONSTRAINT "Rating_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("userId") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Comments" ADD CONSTRAINT "Comments_bookId_fkey" FOREIGN KEY ("bookId") REFERENCES "Book"("bookId") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Comments" ADD CONSTRAINT "Comments_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("userId") ON DELETE RESTRICT ON UPDATE CASCADE;
