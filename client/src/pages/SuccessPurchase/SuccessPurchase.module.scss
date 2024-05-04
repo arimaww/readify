@@ -1,0 +1,156 @@
+@import '../../App.scss';
+
+.purchase {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        width: 156px;
+        height: 156px;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    &__button {
+        display: flex;
+        width: 200px;
+        height: 40px;
+        justify-content: center;
+        align-items: center;
+        margin: 0.5rem;
+        line-height: 35px;
+        border: 1px solid;
+        border-radius: 12px;
+        text-align: center;
+        font-size: 16px;
+        color: #000;
+        text-decoration: none;
+        transition: all 0.35s;
+        box-sizing: border-box;
+
+        &:first-child {
+            $btn-color: #716eef;
+            border-color: $btn-color;
+            color: $btn-color;
+
+            &:hover {
+                color: #fff;
+                transition-delay: 0.2s;
+                animation: ani500 0.8s forwards;
+                background: radial-gradient(circle, $btn-color 0.2em, transparent 0.3em) 6em 6em/1em 1em,
+                    radial-gradient(circle, $btn-color 0.2em, transparent 0.3em) 0 0/1em 1em;
+            }
+        }
+
+        &:nth-child(2) {
+            $btn-color: #dd6395;
+            $btn-hover-color: #dd2470;
+            $size: 8px;
+            $offset: 50%;
+            position: relative;
+            border: none;
+            border-color: $btn-color;
+            color: $btn-color;
+
+            span {
+                width: 100%;
+                display: block;
+                position: relative;
+            }
+
+            &::before,
+            &::after,
+            span::before,
+            span::after {
+                width: $size;
+                height: $size;
+                position: absolute;
+                transition: all 0.5s;
+                border: 3px solid $btn-color;
+                opacity: 0;
+                content: "";
+            }
+
+            &::before {
+                top: 0;
+                left: 0;
+                border-right: none;
+                border-bottom: none;
+                transform: translate(-$offset, -$offset);
+            }
+
+            &::after {
+                bottom: 0;
+                left: 0;
+                border-right: none;
+                border-top: none;
+                transform: translate(-$offset, $offset);
+            }
+
+            span::before {
+                top: 0;
+                right: 0;
+                border-left: none;
+                border-bottom: none;
+                transform: translate($offset, -$offset);
+            }
+
+            span::after {
+                bottom: 0;
+                right: 0;
+                border-left: none;
+                border-top: none;
+                transform: translate($offset, $offset);
+            }
+
+            &:hover {
+                font-size: 16.5px;
+                color: $btn-hover-color;
+
+                &::before,
+                &::after,
+                span::before,
+                span::after {
+                    opacity: 1;
+                    border-color: $btn-hover-color;
+                    transform: translate(0%, 0%);
+                }
+            }
+        }
+
+        @keyframes ani500 {
+            100% {
+                background-size: 2.375em 2.375em, 0.1em 0.1em;
+            }
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+    }
+}
+
+@include breakpoint(medium) {
+    .purchase {
+        margin-top: 40px;
+
+        h2 {
+            font-size: 21px;
+        }
+        &__buttons {
+            flex-direction: column;
+            gap: 0;
+        }
+    }
+}
