@@ -1,0 +1,50 @@
+@import '../../App.scss';
+.sMobile {
+    display: flex;
+    flex-direction: column;
+    &__sidebar {
+        position: absolute;   
+        transition: all .3s ease-in-out;
+    }
+    
+    &__menu {
+        width: 200px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    &__openMenu {
+        display: none;
+        width: 150px;
+    }
+}
+
+@include breakpoint(medium) {
+    .sMobile {
+        grid-template-columns: repeat(1, 1fr);
+        align-items: center;
+        width: 100vw;
+        &__sidebar {
+            top: 200px;
+            left: -1000px;
+            padding: 10px;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.434);
+            border-radius: 12px;
+            z-index: 1000;
+        }
+
+        &__openMenu {
+            display: block;
+            margin-top: 25px;
+            outline: none;
+            background-color: #8B3DFF;
+            color: #fff;
+            border: 0;
+            border-radius: 12px;
+            padding: 12px;
+            cursor: pointer;
+        }
+    }
+}
