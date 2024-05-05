@@ -20,6 +20,10 @@ const booksDirectory = path.join(__dirname, './assets/books');
 if (!fs.existsSync(booksDirectory)) {
     fs.mkdirSync(booksDirectory, { recursive: true });
 }
+const profileDirectory = path.join(__dirname, './assets/profile')
+if(!fs.existsSync(profileDirectory)) {
+    fs.mkdirSync(profileDirectory, {recursive: true});
+}
 
 app.use(cors());
 app.use(morgan('dev'));

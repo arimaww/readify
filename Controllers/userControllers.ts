@@ -4,6 +4,8 @@ import { genSalt, hash, compare } from 'bcrypt'
 import { Prisma, User } from "@prisma/client";
 import { sign } from 'jsonwebtoken'
 import { CustomRequst } from "../Middleware/auth";
+import { toSvg } from "jdenticon/standalone";
+import { writeFileSync } from "fs";
 
 
 export const generateToken = (_id: Number) => {
@@ -47,7 +49,9 @@ export const userLogin = async (req: Request, res: Response) => {
 export const userRegister = async (req: Request, res: Response) => {
     try {
         const { firstName, surName, middleName, email, phone, password, dateOfBirth } = req.body;
-
+        const svg = toSvg(phone, 400);
+        const name = new Date().getMilliseconds + phone;
+        writeFileSync(`${__dirname}/../assets/profile/${name}.svg`, svg);
         if (!firstName || !surName || !middleName || !email || !phone || !password || !dateOfBirth)
             return res.status(400).json({ message: "Все поля обязательны к заполнению" });
 
@@ -70,7 +74,7 @@ export const userRegister = async (req: Request, res: Response) => {
             phone,
             password: hashedPassword,
             dateOfBirth: birthDate,
-            profilePhoto: ''
+            profilePhoto: `http://localhost:${process.env.PORT}/static/profile/${name}.svg`
         };
 
         const user: User = await prisma.user.create({
@@ -154,8 +158,6 @@ export const updateUser = async(req:Request, res: Response) => {
                 profilePhoto: `http://localhost:${process.env.PORT}/static/${req.file?.filename}`
             }
         })
-
-        console.log(req.file)
 
         return res.status(200).json(user);
     }
