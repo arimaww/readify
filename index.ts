@@ -9,6 +9,7 @@ import basketRoutes from './Routes/basketRoutes'
 import bookInfo from './Routes/bookInfoRoutes'
 import walletRoutes from './Routes/walletRoutes'
 import purchaseRoutes from './Routes/purchaseRoutes'
+import saleRoutes from './Routes/saleRoutes'
 import path from 'path';
 import fs from 'fs'
 import { insertBasicRows } from './InsertBasicRows';
@@ -38,6 +39,7 @@ app.use('/api/basket/', basketRoutes)
 app.use('/api/bookInfo/', bookInfo)
 app.use('/api/wallet/', walletRoutes)
 app.use('/api/purchase/', purchaseRoutes)
+app.use('/api/sale/', saleRoutes)
 
 
 app.listen(PORT, () => {

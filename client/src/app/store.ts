@@ -6,6 +6,7 @@ import book from '../features/book/bookSlice'
 import purchase from '../features/purchase/purchaseSlice'
 import basket from '../features/basket/basketSlice'
 import mainSearchSlice from '../features/mainSearch/mainSearchSlice'
+import saleSlice from '../features/sale/saleSlice'
 import { listenerMiddleware, listenerRegisterMiddleware } from '../middleware/auth'
 
 export const store = configureStore({
@@ -16,7 +17,8 @@ export const store = configureStore({
         book,
         purchase,
         basket,
-        mainSearchSlice
+        mainSearchSlice,
+        saleSlice,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware()
     .concat(api.middleware)

@@ -50,7 +50,7 @@ export const userRegister = async (req: Request, res: Response) => {
     try {
         const { firstName, surName, middleName, email, phone, password, dateOfBirth } = req.body;
         const svg = toSvg(phone, 400);
-        const name = new Date().getMilliseconds + phone;
+        const name = surName + phone + dateOfBirth;
         writeFileSync(`${__dirname}/../assets/profile/${name}.svg`, svg);
         if (!firstName || !surName || !middleName || !email || !phone || !password || !dateOfBirth)
             return res.status(400).json({ message: "Все поля обязательны к заполнению" });
@@ -134,9 +134,12 @@ export const changeRole = async (req: Request, res: Response) => {
 
 export const updateUser = async(req:Request, res: Response) => {
     try{
-        const {surName, firstName, middleName, email, phone, password, dateOfBirth} = req.body;
-        if(!req.file)
-            return res.status(404).json({message: "Фотография профиля не найдена"});
+        const {surName, firstName, middleName, email, phone, password, dateOfBirth, wallet} = req.body;
+        let filePath:string | undefined | null = '';
+        if(!req.file) {
+            const user = await prisma.user.findFirst({where: {email: email}});
+            filePath = user?.profilePhoto;
+        }
 
         const salt = await genSalt(10)
         const hashedPassword = await hash(password, salt);
@@ -154,8 +157,9 @@ export const updateUser = async(req:Request, res: Response) => {
                 phone: phone,
                 email: email,
                 password: hashedPassword,
+                wallet: wallet,
                 dateOfBirth: new Date(dateOfBirth)!,
-                profilePhoto: `http://localhost:${process.env.PORT}/static/${req.file?.filename}`
+                profilePhoto: req.file ? `http://localhost:${process.env.PORT}/static/${req.file?.filename}` : filePath
             }
         })
 
