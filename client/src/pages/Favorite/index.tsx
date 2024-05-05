@@ -4,6 +4,7 @@ import { selectUser } from "../../features/auth/authSlice"
 import { BookListCards } from "../../components/BookListCards";
 import { useGetAllBooksQuery } from "../../app/services/book";
 import { LoadingPage } from "../../components/LoadingPage";
+import styles from './Favorite.module.scss'
 
 const Favorite = () => {
   const user = useSelector(selectUser);
@@ -15,7 +16,8 @@ const Favorite = () => {
     return <LoadingPage />
 
   return (
-    <div style={{marginTop: "100px"}}>
+    <div className={styles.favorite}>
+      <h1>Избранное</h1>
       <BookListCards forSomeAuthor={false} searchData={fd}/>
     </div>
   )

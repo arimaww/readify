@@ -1,0 +1,13 @@
+@import '../../App.scss';
+.favorite {
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+}
+
+@include breakpoint(medium) {
+    .favorite {
+        text-align: center;
+        align-items: center;
+    }
+}
