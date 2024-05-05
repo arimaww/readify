@@ -3,7 +3,7 @@ import { getAllTypes } from "../Controllers/bookTypeControllers";
 
 const router = Router();
 
-router.get("types/", getAllTypes)
+router.get("/", getAllTypes)
 
 
 export { router as bookTypeRoutes };
