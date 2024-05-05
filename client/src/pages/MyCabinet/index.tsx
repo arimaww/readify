@@ -36,7 +36,9 @@ const MyCabinet = () => {
       formData.append("phone", data.phone)
       formData.append("password", data.password)
       formData.append("dateOfBirth", dateOfBirth)
-      formData.append("profilePhoto", avatar[0].file!)
+      if(avatar[0]) {
+        formData.append("profilePhoto", avatar[0].file!)
+      }
       if (password !== repeatPassword)
         return setError("Введённые вами пароли не совпадают")
       await update(formData).unwrap();
