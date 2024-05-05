@@ -1,4 +1,3 @@
-
 import { useSelector } from 'react-redux'
 import styles from './MyCabinet.module.scss'
 import { selectUser } from '../../features/auth/authSlice'
@@ -7,11 +6,11 @@ import { useNavigate } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { UserData, useUpdateMutation } from '../../app/services/auth'
 import { useSnackbar } from 'notistack'
-import { Sidebar } from '../../components/Sidebar'
 import { ImageListType } from 'react-images-uploading';
 import { TUserInputs } from '../../types'
 import { isErrorWithMessage } from '../../utils/is-error-with-message'
 import EditForm from '../../components/EditForm'
+import { SidebarMobile } from '../../components/SidebarMobile'
 
 
 const MyCabinet = () => {
@@ -69,10 +68,7 @@ const MyCabinet = () => {
   return (
     <div className={styles.cabinet}>
       <div className={styles.cabinet__menu}>
-        <button className={styles.cabinet__openMenu} onClick={() => setIsMenuOpen(prev => !prev)}>{isOpen ? "Закрыть" : "Открыть меню"}</button>
-        <div className={styles.cabinet__sidebar} style={isOpen ? { left: "0" } : {}}>
-          <Sidebar setIsMenuOpen={setIsMenuOpen} />
-        </div>
+        <SidebarMobile isOpen={isOpen} setIsMenuOpen={setIsMenuOpen} />
       </div>
 
       <div className={styles.mycab}>
