@@ -3,12 +3,13 @@ import styles from './BasketBuy.module.scss'
 import { LoadingPage } from '../LoadingPage'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../../features/auth/authSlice'
+import { SnackbarKey } from 'notistack'
 
 
 type TBasketBuy = {
   countOfBooks: number,
   fullPrice: number,
-  clickPurchase: (data: Omit<Purchase, "purchasedId">[]) => Promise<void>,
+  clickPurchase: (data: Omit<Purchase, "purchasedId">[]) => Promise<SnackbarKey | undefined>
   basketList: Book[] | undefined,
 }
 type Sd = Omit<Purchase, "purchasedId">[]
