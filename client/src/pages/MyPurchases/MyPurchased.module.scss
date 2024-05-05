@@ -1,8 +1,32 @@
+@import '../../App.scss';
+
 .myPurchases {
-    display: flex;
-    gap: 30px;
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+
     &__list {
+        grid-column-start: span 2;
         display: flex;
-        width: 80%;
+        width: 100%;
+    }
+
+    &__menu {
+        width: 200px;
+        height: 90%;
+        display: flex;
+        flex-direction: column;
+
+    }
+}
+
+@include breakpoint(medium) {
+    .myPurchases {
+        grid-template-columns: repeat(1, 1fr);
+
+        &__list {
+            width: 100%;
+        }
     }
 }
