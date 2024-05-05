@@ -3,7 +3,7 @@ import { useGetUserBasketQuery, useRemoveBookFromUserBasketMutation } from "../.
 import { BasketBookList } from "../../components/BasketBookList"
 import { selectUser } from "../../features/auth/authSlice";
 import { useGetAllBooksQuery } from "../../app/services/book";
-import { useGetUserFavoritesQuery, useUpdateMutation } from "../../app/services/auth";
+import { useUpdateMutation } from "../../app/services/auth";
 import BasketBuy from "../../components/BasketBuy";
 import styles from './Basket.module.scss'
 import { useState } from "react";
@@ -13,6 +13,7 @@ import { isErrorWithMessage } from "../../utils/is-error-with-message";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 import { useCreateSaleMutation } from "../../app/services/sale";
+import { useGetUserFavoritesQuery } from "../../app/services/favorite";
 
 export const Basket = () => {
   const [purchaseBook] = useCreatePurchaseMutation();

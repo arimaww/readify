@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 import { selectUser } from "../../features/auth/authSlice"
 import { TData } from "../BookListCards"
 import { useState } from "react"
-import { useAddToFavoriteMutation, useRemoveFromFavoriteMutation } from "../../app/services/auth"
+import { useAddToFavoriteMutation, useRemoveFromFavoriteMutation } from "../../app/services/favorite"
 import { isErrorWithMessage } from "../../utils/is-error-with-message"
 import styles from './BasketBookList.module.scss'
 import { BasketResultData, useAddToUserBasketMutation, useRemoveBookFromUserBasketMutation } from "../../app/services/basket"

@@ -8,4 +8,4 @@ router.post("/", addToUserBasket);
 router.delete("/", removeBookFromUserBasket);
 
 
-export default router
+export { router as basketRoutes }

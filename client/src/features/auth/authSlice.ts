@@ -1,11 +1,11 @@
-import {createSlice} from "@reduxjs/toolkit"
-import {Favorite, User} from "@prisma/client"
+import { createSlice } from "@reduxjs/toolkit"
+import { Favorite, User } from "@prisma/client"
 import { authApi } from "../../app/services/auth"
 import { RootState } from "../../app/store"
 
 
 interface InitialState {
-    user: User & {token: string} | null;
+    user: User & { token: string } | null;
     users: User[] | null
     isAuthenticated: boolean;
     favorite: Favorite[] | null
@@ -41,17 +41,13 @@ const slice = createSlice({
             state.isAuthenticated = false;
         }).addMatcher(authApi.endpoints.setUserAvatar.matchFulfilled, (state, action) => {
             state.user = action.payload;
-        }).addMatcher(authApi.endpoints.addToFavorite.matchFulfilled, (state, action) => {
-            state.favorite = action.payload;
-        }).addMatcher(authApi.endpoints.getUserFavorites.matchFulfilled, (state, action) => {
-            state.favorite = action.payload;
         }).addMatcher(authApi.endpoints.getAllUsers.matchFulfilled, (state, action) => {
             state.users = action.payload;
         })
     }
 })
 
-export const {logout} = slice.actions;
+export const { logout } = slice.actions;
 export default slice.reducer;
 
 export const selectIsAuthenticated = (state: RootState) => state.auth.isAuthenticated

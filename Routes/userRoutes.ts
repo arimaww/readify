@@ -19,9 +19,9 @@ const upload = multer({ storage })
 router.post('/login', userLogin);
 router.post('/register', userRegister);
 router.get('/current', auth, userCurrent);
-router.post('/update',  upload.single("profilePhoto"), updateUser);
+router.post('/update', upload.single("profilePhoto"), updateUser);
 router.post('/changeRole', changeRole)
 router.delete('/delete', deleteUser)
 router.get('/allUsers', getAllUsers)
 
-export default router;
+export { router as userRoutes };

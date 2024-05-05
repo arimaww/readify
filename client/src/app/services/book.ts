@@ -8,13 +8,6 @@ export type UserId = Pick<User, "userId">
 
 export const bookApi = api.injectEndpoints({
     endpoints: (builder) => ({
-        getBookList: builder.query<Book[], { id: number | undefined}>({
-            query: (data) => ({
-                url: `/book/${data.id}`,
-                body: data,
-                method: "POST",
-            }),
-        }),
         getBookById: builder.query<ResponseBookData, { bookId: number | undefined }>({
             query: (data) => ({
                 url: `/book/getBooks/${data.bookId}`,
@@ -47,28 +40,19 @@ export const bookApi = api.injectEndpoints({
         }),
         getAllTypes: builder.query<BookType[], void>({
             query: () => ({
-                url: "/book/types",
+                url: "/types",
                 method: "GET"
             })
         }),
         getAllCategories: builder.query<Categories[], void>({
             query: () => ({
-                url: "book/categories",
+                url: "/categories",
                 method: "GET"
             })
         }),
-        getAuthorById: builder.query<User, {authorId: number | undefined}>({
-            query(data) {
-                return {
-                    url: "book/author/getAuthorById",
-                    body: data,
-                    method: "POST",
-                }
-            }
-        }),
         getAllBooks: builder.query<Book[], void>({
             query: () => ({
-                url: "book/b/getAllBooks",
+                url: "/book/b/getAllBooks",
                 method: "GET",
             })
         }),
@@ -76,11 +60,10 @@ export const bookApi = api.injectEndpoints({
     })
 })
 
-export const { endpoints: { getBookList, createBook, deleteBook, updateBook, getAllTypes, getAllCategories, getBookById, getAuthorById, getAllBooks } } = bookApi;
+export const { endpoints: { createBook, deleteBook, updateBook, getAllTypes, getAllCategories, getBookById, getAllBooks } } = bookApi;
 
-export const { useGetBookListQuery, useCreateBookMutation, useDeleteBookMutation, useUpdateBookMutation,
+export const { useCreateBookMutation, useDeleteBookMutation, useUpdateBookMutation,
     useGetAllTypesQuery,
     useGetAllCategoriesQuery,
     useGetBookByIdQuery,
-    useGetAuthorByIdQuery,
     useGetAllBooksQuery } = bookApi;

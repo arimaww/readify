@@ -27,8 +27,6 @@ export const bookSlice = createSlice({
             state.book = action.payload;
         }).addMatcher(bookApi.endpoints.deleteBook.matchFulfilled, (state, action) => {
             state.book = action.payload;
-        }).addMatcher(bookApi.endpoints.getBookList.matchFulfilled, (state, action) => {
-            state.bookList = action.payload;
         }).addMatcher(bookApi.endpoints.updateBook.matchFulfilled, (state, action) => {
             state.book = action.payload;
         }).addMatcher(bookApi.endpoints.getAllTypes.matchFulfilled, (state, action) => {
@@ -37,8 +35,6 @@ export const bookSlice = createSlice({
             state.bookCategories = action.payload;
         }).addMatcher(bookApi.endpoints.getBookById.matchFulfilled, (state, action) => {
             state.book = action.payload;
-        }).addMatcher(bookApi.endpoints.getAuthorById.matchFulfilled, (state, action) => {
-            state.user = action.payload;
         }).addMatcher(bookApi.endpoints.getAllBooks.matchFulfilled, (state, action) => {
             state.bookList = action.payload;
         })

@@ -11,4 +11,4 @@ router.post('/leaveComment', leaveComment)
 router.delete('/removeComment', removeComment)
 router.post('/getAllCommentsForBook', getAllCommentsForBook)
 
-export default router;
+export { router as bookInfoRoutes };

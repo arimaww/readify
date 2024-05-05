@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom"
-import { useGetAuthorByIdQuery, useGetBookByIdQuery } from "../../app/services/book";
+import { useGetBookByIdQuery } from "../../app/services/book";
 import styles from './PreviewBook.module.scss';
 import { AuthorLoad } from "../../components/AuthorLoad";
 import ReactStars from "react-star-ratings";
@@ -10,6 +10,7 @@ import { useGetAllPurchasesByUserIdQuery } from "../../app/services/purchase";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../features/auth/authSlice";
 import { LoadingPage } from "../../components/LoadingPage";
+import { useGetAuthorByIdQuery } from "../../app/services/author";
 
 const PreviewBook = () => {
   const { bookId } = useParams();

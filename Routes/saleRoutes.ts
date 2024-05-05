@@ -7,4 +7,4 @@ router.get('/', getSales);
 router.post('/', createSale);
 router.delete('/', terminateSale);
 
-export default router;
+export { router as saleRoutes };

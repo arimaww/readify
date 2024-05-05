@@ -1,9 +1,9 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import './App.scss'
-import Login from './pages/login'
+import Login from './pages/Login'
 import Navbar from './components/Navbar'
 import 'reactjs-popup/dist/index.css';
-import Register from './pages/register';
+import Register from './pages/Register';
 import MyCabinet from './pages/MyCabinet';
 import { SupportChat } from './pages/SupportChat';
 import AuthorCabinet from './pages/AuthorCabinet';

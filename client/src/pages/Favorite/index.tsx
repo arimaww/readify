@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { useGetUserFavoritesQuery } from "../../app/services/auth"
+import { useGetUserFavoritesQuery } from "../../app/services/favorite"
 import { selectUser } from "../../features/auth/authSlice"
 import { BookListCards } from "../../components/BookListCards";
 import { useGetAllBooksQuery } from "../../app/services/book";

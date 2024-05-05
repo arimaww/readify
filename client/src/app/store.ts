@@ -7,6 +7,8 @@ import purchase from '../features/purchase/purchaseSlice'
 import basket from '../features/basket/basketSlice'
 import mainSearchSlice from '../features/mainSearch/mainSearchSlice'
 import saleSlice from '../features/sale/saleSlice'
+import favoriteSlice from '../features/favorite/favoriteSlice'
+import authorSlice from '../features/author/authorSlice'
 import { listenerMiddleware, listenerRegisterMiddleware } from '../middleware/auth'
 
 export const store = configureStore({
@@ -19,6 +21,8 @@ export const store = configureStore({
         basket,
         mainSearchSlice,
         saleSlice,
+        favoriteSlice,
+        authorSlice,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware()
     .concat(api.middleware)

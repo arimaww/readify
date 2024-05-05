@@ -1,4 +1,4 @@
-import { Favorite, User } from "@prisma/client";
+import { User } from "@prisma/client";
 import { api } from "./api";
 
 
@@ -51,32 +51,7 @@ export const authApi = api.injectEndpoints({
                 method: "POST",
             }),
         }),
-        addToFavorite: builder.mutation<Favorite[], { userId: number | undefined, bookId: number }>({
-            query: data => ({
-                url: "/book/favorite/addToFavorite",
-                body: data,
-                method: "POST"
-            }),
-            invalidatesTags: ['Favorite']
 
-        }),
-        getUserFavorites: builder.query<Favorite[], { userId: number | undefined }>({
-            query: (data) => ({
-                url: "/book/favorite/fs/getFavorites",
-                body: data,
-                method: "POST"
-            }),
-            providesTags: ['Favorite']
-
-        }),
-        removeFromFavorite: builder.mutation<string, { userId: number | undefined, bookId: number }>({
-            query: (data) => ({
-                url: "/book/favorite/removeFromFavorite",
-                body: data,
-                method: "DELETE"
-            }),
-            invalidatesTags: ['Favorite']
-        }),
         getAllUsers: builder.query<User[], void>({
             query: () => ({
                 url: "/user/allUsers",
@@ -87,17 +62,15 @@ export const authApi = api.injectEndpoints({
 })
 
 
-export const { useRemoveFromFavoriteMutation,
+export const {
     useRegisterMutation,
     useLoginMutation,
     useCurrentQuery,
     useUpdateMutation,
     useDeleteUserMutation,
     useSetUserAvatarMutation,
-    useAddToFavoriteMutation,
-    useGetUserFavoritesQuery,
     useGetAllUsersQuery } = authApi;
 
 export const {
-    endpoints: { login, register, current, update, deleteUser, setUserAvatar, addToFavorite, getUserFavorites, removeFromFavorite, getAllUsers }
+    endpoints: { login, register, current, update, deleteUser, setUserAvatar, getAllUsers }
 } = authApi;

@@ -6,4 +6,4 @@ const router = Router();
 
 router.post('/setWalletValue', setWalletValue)
 
-export default router;
+export { router as walletRoutes }
