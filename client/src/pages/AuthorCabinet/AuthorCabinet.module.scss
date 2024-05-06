@@ -1,3 +1,66 @@
+@import '../../App.scss';
+
 .authorCabinet {
     padding: 20px;
+
+    &__changeButtons {
+        display: flex;
+        justify-content: start;
+        gap: 25px;
+        margin-bottom: 30px;
+        button {
+            display: flex;
+            width: 200px;
+            height: 40px;
+            justify-content: center;
+            align-items: center;
+            margin: 0.5rem;
+            line-height: 35px;
+            border: 1px solid;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 16px;
+            color: #000;
+            text-decoration: none;
+            transition: all 0.35s;
+            box-sizing: border-box;
+
+            cursor: pointer;
+
+            $btn-color: #191919;
+            $btn-hover-color: #dd6395;
+            $offset: 0.3em;
+            border-color: $btn-color;
+            color: $btn-color;
+            box-shadow: $offset $offset 0 $btn-hover-color;
+
+            &:hover {
+                box-shadow: (-$offset) (-$offset) 0 #979695;
+                background-color: $btn-hover-color;
+                border-color: $btn-hover-color;
+                color: #fff;
+            }
+        }
+    }
+}
+
+@include breakpoint(medium) {
+    .authorCabinet {
+
+        &__changeButtons {
+            justify-content: center;
+            button {
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+@include breakpoint(small) {
+    .authorCabinet {
+        &__changeButtons {
+            align-items: center;
+            flex-direction: column;
+        }
+    }
 }
