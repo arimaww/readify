@@ -51,13 +51,19 @@ export const authApi = api.injectEndpoints({
                 method: "POST",
             }),
         }),
-
         getAllUsers: builder.query<User[], void>({
             query: () => ({
                 url: "/user/allUsers",
                 method: "GET"
             })
-        })
+        }),
+        isLoginDataCorrect: builder.mutation<ResponseLoginData, UserData>({
+            query: (userData) => ({
+                url: "/user/login",
+                body: userData,
+                method: "POST"
+            }),
+        }),
     })
 })
 
@@ -69,8 +75,8 @@ export const {
     useUpdateMutation,
     useDeleteUserMutation,
     useSetUserAvatarMutation,
-    useGetAllUsersQuery } = authApi;
+    useGetAllUsersQuery, useIsLoginDataCorrectMutation } = authApi;
 
 export const {
-    endpoints: { login, register, current, update, deleteUser, setUserAvatar, getAllUsers }
+    endpoints: { login, register, current, update, deleteUser, setUserAvatar, isLoginDataCorrect }
 } = authApi;

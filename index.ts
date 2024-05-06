@@ -9,9 +9,10 @@ import { insertBasicRows } from './InsertBasicRows';
 import {
     authorRoutes, basketRoutes, bookInfoRoutes,
     bookRoutes, bookTypeRoutes, categoriesRoutes,
-    favoriteRoutes, purchaseRoutes, saleRoutes,
+    favoriteRoutes, mailRoutes, purchaseRoutes, saleRoutes,
     userRoutes, walletRoutes
 } from './Routes';
+import { sendCodeToUser } from './sendMail';
 
 const app = express();
 const PORT = process.env.PORT!;
@@ -43,7 +44,7 @@ app.use('/api/purchase/', purchaseRoutes)
 app.use('/api/sale/', saleRoutes)
 app.use('/api/types/', bookTypeRoutes)
 app.use('/api/author/', authorRoutes)
-
+app.use('/api/mail/', mailRoutes)
 
 app.listen(PORT, () => {
     console.log(`server started on the port = ${PORT}`)
