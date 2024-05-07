@@ -21,7 +21,7 @@ const PreviewBook = () => {
   const purchases = useGetAllPurchasesByUserIdQuery({ userId: Number(user?.userId) })
   const isThisBookPurchases = purchases.data?.filter(el => el.bookId === Number(bookId))
 
-  const bookAuthor = useGetAuthorByIdQuery({ authorId: book.data?.authorId });
+  const bookAuthor = useGetAuthorByIdQuery({ userId: book.data?.authorId });
 
 
   let avgRating = 0;

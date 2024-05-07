@@ -8,7 +8,7 @@ export type UserId = Pick<User, "userId">
 
 export const authorApi = api.injectEndpoints({
     endpoints: (builder) => ({
-        getAuthorById: builder.query<User, { authorId: number | undefined }>({
+        getAuthorById: builder.query<User, { userId: number | undefined }>({
             query: (data) => ({
                 url: "/author/d/getAuthorById",
                 body: data,
