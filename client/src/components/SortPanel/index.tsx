@@ -30,16 +30,18 @@ type TSortPanel = {
 }
 const SortPanel = ({ selectedOption, setSelectedOption, sortData, setSortData }: TSortPanel) => {
     const selectRef = useRef<any>(null);
-    const withSubscription = useRef<any>(null);
+    const formatRef = useRef<any>(null);
+    // const withSubscription = useRef<any>(null);
     const withDiscount = useRef<any>(null);
     const [rusLang, engLang, gerLang, azerLang] = [useRef<any>(null), useRef<any>(null), useRef<any>(null), useRef<any>(null)];
 
     const resetInputsAndSelect = () => {
-        if (selectRef.current && withSubscription.current && withDiscount.current
-            && rusLang.current && engLang.current && gerLang.current && azerLang.current
+        if (selectRef.current && withDiscount.current
+            && rusLang.current && engLang.current && gerLang.current && azerLang.current && formatRef.current
         ) {
             selectRef.current.setValue(null);
-            withSubscription.current.checked = false;
+            // withSubscription.current.checked = false;
+            formatRef.current.checked = true;
             withDiscount.current.checked = false;
             [rusLang, engLang, gerLang, azerLang].forEach(ref => {
                 if (ref.current) {
@@ -60,7 +62,7 @@ const SortPanel = ({ selectedOption, setSelectedOption, sortData, setSortData }:
                     <label htmlFor="subscription">Доступно по подписке</label>
                     <input ref={withSubscription} type="checkbox" id="subscription" onChange={(event: ChangeEvent<HTMLInputElement>) => setSortData({ ...sortData, withSubscription: event.target.checked })} />
                 </div>
-            </div> Подписки пока нет */ }
+            </div> Подписки пока нет*/}
 
             <div className={styles.popular}>
                 <h3>Популярность</h3>
@@ -75,7 +77,7 @@ const SortPanel = ({ selectedOption, setSelectedOption, sortData, setSortData }:
                 <h3>Формат</h3>
 
                 <div className={styles.sortPanel__inputItem}>
-                    <input type="radio" id='all' name='format' onChange={() => setSortData({ ...sortData, format: "All" })} />
+                    <input type="radio" id='all' name='format' ref={formatRef} onChange={() => setSortData({ ...sortData, format: "All" })} />
                     <label htmlFor="all">Все</label>
                 </div>
                 <div className={styles.sortPanel__inputItem}>
