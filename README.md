@@ -2,6 +2,14 @@
 
 A project to learn modern full-stack development made by Islam: islammirzabekov228@gmail.com
 
+## 📖 Quick Index
+* [🚀Features](#features-)
+* [💻 Tools](#tools-)
+* [⚡ Database Scheme](#database-scheme-)
+* [🌀 Demo](#demo-)
+* [📱 Feedback](#feedback-)
+* [💾 License](#license-)
+
 ## Features <img src="https://github.com/Tarikul-Islam-Anik/tarikul-islam-anik/blob/main/assets/images/Rocket.png?raw=true" width="30"/>
 - Authentication
 - Editing personal account
@@ -31,6 +39,11 @@ Built with:
 
 ## Database scheme <img src="https://github.com/Tarikul-Islam-Anik/tarikul-islam-anik/blob/main/assets/images/Cyclone.png?raw=true" width="30">
 ![Infological scheme](https://github.com/arimaww/readify/assets/74357802/aef81caf-4f04-4b22-b5e0-6887a7384922)
+
+## Demo 🌀
+https://github.com/arimaww/readify/assets/74357802/1aaf6014-2341-48c4-9393-0257f4f4acbb
+
+
 
 ## Feedback <img src="https://github.com/Tarikul-Islam-Anik/tarikul-islam-anik/blob/main/assets/images/Writing%20Hand%20Light%20Skin%20Tone.png?raw=true" width="30"/>
 
