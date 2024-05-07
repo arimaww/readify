@@ -25,3 +25,24 @@ export const getAuthorBooks = async (req: Request, res: Response) => {
         res.status(500).json({ message: "Fatal Error " + err });
     }
 }
+
+export const getAuthorById = async (req: Request, res: Response) => {
+    try{
+        const {userId} = req.body;
+
+        if(!userId)
+            return res.status(400).json({message: "Поле authorId не заполнено"});
+
+        const user = await prisma.user.findFirst<Prisma.UserFindFirstArgs>({where: {userId: parseInt(userId), role: "AUTHOR"}});
+
+        if(!user)
+            return res.status(404).json({message: "Такого автора не существует"});
+
+
+        return res.status(200).json(user);
+    }
+    catch(err) {
+        console.log(err);
+        res.status(500).json(err)
+    }
+}

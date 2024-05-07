@@ -5,7 +5,7 @@ import { RootState } from "../../app/store";
 
 type InitialState = {
     bookList: Book[] | null
-    user?: User | null
+    author?: User | null
 }
 
 const initialState:InitialState = {
@@ -20,7 +20,7 @@ export const authorSlice = createSlice({
         builder.addMatcher(authorApi.endpoints.getBookList.matchFulfilled, (state, action) => {
             state.bookList = action.payload;
         }).addMatcher(authorApi.endpoints.getAuthorById.matchFulfilled, (state, action) => {
-            state.user = action.payload;
+            state.author = action.payload;
         })
     }
 })
