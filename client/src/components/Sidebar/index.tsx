@@ -61,7 +61,7 @@ export const Sidebar = ({setIsMenuOpen}:TSiderar) => {
         <div className={styles.sidebar__items}>
           <Link to={'/mycab'}>Личные данные</Link>
           <Link to={'/'}>Интересы</Link>
-          <Link to={'/'}>Избранное</Link>
+          <Link to={'/favorite'}>Избранное</Link>
           <Link to={'/mypurchases'}>Мои покупки</Link>
           {admin?.role === "AUTHOR" || user?.role === "AUTHOR" ? <Link to={`/author_cabinet/${user?.userId}`}>Кабинет автора</Link> : ""}
           <Link to={'/'}>Частые вопросы</Link>
