@@ -54,7 +54,11 @@
             padding: 0;
         }
 
-        button {
+        button, .link_btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
             border: 0;
             border-radius: 12px;
             background-color: #3D3DC7;
