@@ -65,7 +65,6 @@ export const Sidebar = ({setIsMenuOpen}:TSiderar) => {
           <Link to={'/mypurchases'}>Мои покупки</Link>
           {admin?.role === "AUTHOR" || user?.role === "AUTHOR" ? <Link to={`/author_cabinet/${user?.userId}`}>Кабинет автора</Link> : ""}
           <Link to={'/'}>Частые вопросы</Link>
-          <Link to={'/'}>Чат с поддержкой</Link>
           <button onClick={() => {setIsOpen(true); setIsMenuOpen(false)}}>
             {resultDeleteUser.isLoading ? "Ожидание..." : "Удалить профиль"}
           </button>

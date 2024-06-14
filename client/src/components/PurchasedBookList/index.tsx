@@ -18,7 +18,7 @@ export const PurchasedBookList = ({ books }: TPurchasedBookList) => {
                         <h3>{book.bookName}</h3>
                     </div>
                     <div className={styles.purchasedBookList__button}>
-                        <Link to={book.file}>{book.typeId === 1 ? "Читать" : "Слушать"}</Link>
+                        {book.typeId === 1 ? <Link to={book.file}>Читать</Link> : <Link to={`/listenbook/${book.bookId}`}>Слушать</Link>}
                     </div>
                 </div>
             )}

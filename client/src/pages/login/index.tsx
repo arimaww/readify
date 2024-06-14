@@ -95,7 +95,7 @@ const Login = () => {
     }
     else enqueueSnackbar("Неправильный код", { variant: "error" })
   }
-  
+  console.log(code)
   return (
     <div className={styles.login}>
       {isConfirmOpened ? <ConfirmCode inputCode={inputCode}

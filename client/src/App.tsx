@@ -19,6 +19,7 @@ import { useGetAllBooksQuery } from './app/services/book';
 import { setSearchBooks } from './features/mainSearch/mainSearchSlice';
 import { useDispatch } from 'react-redux';
 import { SuccessPurchase } from './pages/SuccessPurchase';
+import { ListenAudioBook } from './pages/ListenAudioBook';
 
 const App = () => {
   const [search, setSearch] = useState<string>("");
@@ -50,6 +51,7 @@ const App = () => {
           <Route path='/basket' element={<Basket />} />
           <Route path='/mypurchases' element={<MyPurchases />} />
           <Route path='/success-purchase' element={<SuccessPurchase />} />
+          <Route path={`/listenbook/:id`} element={<ListenAudioBook />} />
           <Route path='*' element={<Navigate to={"/"} />} />
         </Routes>
       </div>

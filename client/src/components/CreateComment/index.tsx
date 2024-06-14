@@ -19,6 +19,7 @@ export const CreateComment = () => {
     const {bookId} = useParams();
 
     const {enqueueSnackbar} = useSnackbar();
+    console.log(commentText)
     const handleSubmitComment = async (event:FormEvent) => {
         event.preventDefault();
         try{
@@ -29,6 +30,8 @@ export const CreateComment = () => {
             await leaveAComemnt({userId: Number(user?.userId), bookId: Number(bookId), text: commentText}).unwrap();
             await setRatingForComment({userId: Number(user?.userId), bookId: Number(bookId), value: Number(rating)})
             enqueueSnackbar("Комментарий успешно добавлен", {variant: "success"})
+            setRating(0);
+            setCommentText('');
         }
         catch(err) {
             if(isErrorWithMessage(err)) {
@@ -43,7 +46,7 @@ export const CreateComment = () => {
     return (
         <form className={styles.createComment} onSubmit={handleSubmitComment}>
             <h3>Оставить комментарий</h3>
-            <textarea name="" id="" cols={30} rows={10} defaultValue={commentText} onChange={(event:ChangeEvent<HTMLTextAreaElement>) => setCommentText(event.currentTarget.value)}></textarea>
+            <textarea name="" id="" cols={30} rows={10} defaultValue={commentText} value={commentText} onChange={(event:ChangeEvent<HTMLTextAreaElement>) => setCommentText(event.currentTarget.value)}></textarea>
             <StarRatings
                 changeRating={val => setRating(val)}
                 rating={rating}

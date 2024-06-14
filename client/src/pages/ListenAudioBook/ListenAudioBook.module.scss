@@ -1,0 +1,46 @@
+@import '../../App.scss';
+
+
+.listen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    gap: 20px;
+    width: 80%;
+    margin: 0 auto;
+
+
+    .image {
+        width: 100%;
+        height: 500px;
+        margin: 0 auto;
+    }
+}
+
+
+@include breakpoint(medium) {
+    .listen {
+        width: 90%;
+        .image {
+            margin: 0 auto;
+            width: 400px;
+            height: 400px;
+        }
+    }
+}
+@include breakpoint(small) {
+    .listen {
+        .image {
+            width: 300px;
+            height: 300px;
+        }
+    }
+}
+
+@include breakpoint(large) {
+    .listen {
+        width: 50%;
+    }
+}
